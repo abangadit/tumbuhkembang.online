@@ -1,0 +1,3359 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tumbuhkembang.online — Teman Tumbuh Kembang Si Kecil</title>
+    <meta name="description"
+        content="Informasi parenting berbasis sains, kalkulator tumbuh kembang, dan panduan MPASI terpercaya untuk Mama.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --primary: #3BAD8A;
+            --primary-dark: #2A8A6C;
+            --primary-light: #EAF6F1;
+            --accent: #F9A825;
+            --bg: #FAFAF8;
+            --bg-card: #FFFFFF;
+            --text-main: #2C2C2A;
+            --text-muted: #6B6B66;
+            --border: #E8E6E0;
+            --ad-bg: #F3F3F0;
+            --font-display: 'Plus Jakarta Sans', sans-serif;
+            --font-body: 'Lora', Georgia, serif;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-display {
+            font-family: var(--font-display);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: inherit;
+        }
+
+        /* Ad Containers */
+        .ad-slot {
+            background: var(--ad-bg);
+            border: 1px dashed #D0CEC8;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ad-slot::before {
+            content: 'IKLAN';
+            position: absolute;
+            top: 4px;
+            left: 8px;
+            font-size: 9px;
+            color: #AAA8A0;
+            font-family: var(--font-display);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+
+        .ad-leaderboard {
+            width: 100%;
+            max-width: 728px;
+            height: 90px;
+        }
+
+        .ad-rect {
+            width: 300px;
+            height: 250px;
+        }
+
+        .ad-mobile {
+            width: 320px;
+            height: 50px;
+        }
+
+        .ad-native {
+            width: 100%;
+            height: 120px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: -0.03em;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: var(--font-display);
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        /* Layout */
+        main {
+            padding-top: 70px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-padding {
+            padding: 60px 0;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #F0F9F5 0%, #EBF7F3 100%);
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(32px, 5vw, 56px);
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            letter-spacing: -0.04em;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            max-width: 500px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-family: var(--font-display);
+            transition: all 0.2s;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(59, 173, 138, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 173, 138, 0.4);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Article Cards */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-img {
+            height: 200px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .card-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        /* Sidebar */
+        .layout-with-sidebar {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .sidebar-sticky {
+            position: sticky;
+            top: 90px;
+        }
+
+        /* Shop Section */
+        .shop-banner {
+            background: linear-gradient(135deg, #1A1A18 0%, #2C2C2A 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1A1A18;
+            color: #9B9B96;
+            padding: 80px 0 40px;
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-title {
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Mobile Sticky Ad */
+        #mobile-sticky-ad {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: white;
+            border-top: 1px solid var(--border);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Tools */
+        .tool-box {
+            background: white;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-family: var(--font-display);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Interstitial */
+        #interstitial {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .interstitial-card {
+            background: white;
+            border-radius: 24px;
+            max-width: 500px;
+            width: 100%;
+            padding: 32px;
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+
+            .hero-grid,
+            .layout-with-sidebar {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-img {
+                display: none;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .sidebar-sticky {
+                position: static;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#/" class="logo">
+                <div class="logo-icon">🌱</div>
+                <span>tumbuhkembang<span style="color:var(--primary)">.online</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="#/" class="nav-link" data-route="home">Beranda</a>
+                <a href="#/tools" class="nav-link" data-route="tools">Alat Pantau</a>
+                <a href="#/download" class="nav-link" data-route="download">Printable</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="app-content"></main>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo" style="color:white; margin-bottom:20px">
+                        <div class="logo-icon">🌱</div>
+                        <span>tumbuhkembang.online</span>
+                    </div>
+                    <p>Partner terpercaya Mama dalam memantau tumbuh kembang si kecil. Berbasis sains, ditulis dengan
+                        cinta.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Artikel</h4>
+                    <div class="footer-links">
+                        <a href="#">MPASI & Nutrisi</a>
+                        <a href="#">GTM & Picky Eater</a>
+                        <a href="#">Tumbuh Kembang</a>
+                        <a href="#">Kesehatan Anak</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Alat Pantau</h4>
+                    <div class="footer-links">
+                        <a href="#/tools">Kalkulator BB/TB</a>
+                        <a href="#/tools">Milestone Tracker</a>
+                        <a href="#/download">Ebook Gratis</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Tentang</h4>
+                    <div class="footer-links">
+                        <a href="#">Tim Penulis</a>
+                        <a href="#">Kontak Kami</a>
+                        <a href="#">Disclaimer</a>
+                    </div>
+                </div>
+            </div>
+            <div
+                style="border-top:1px solid #333; padding-top:30px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; font-size:13px">
+                <p>© 2025 tumbuhkembang.online. Semua hak cipta dilindungi.</p>
+                <p>Website ini mengandung konten informatif, bukan pengganti saran medis profesional.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="mobile-sticky-ad">
+        <div class="ad-slot ad-mobile">Sticky Mobile Banner Ad Slot</div>
+    </div>
+
+    <div id="interstitial">
+        <div class="interstitial-card">
+            <h3 style="margin-bottom:10px">Persiapan Download...</h3>
+            <p style="color:var(--text-muted); margin-bottom:20px">File Anda akan siap dalam beberapa detik.</p>
+            <div class="ad-slot ad-rect" style="margin-bottom:20px">Interstitial Ad Slot</div>
+            <div id="download-timer" style="font-weight:700; color:var(--primary); margin-bottom:15px">Mohon tunggu 5
+                detik...</div>
+            <button id="btn-skip-download" class="btn btn-primary" style="display:none; width:100%">Download
+                Sekarang</button>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA ---
+        const ARTICLES = [
+            { id: 1, category: "GTM", title: "Anak GTM? Ini 7 Penyebab dan Cara Mengatasi dengan Tepat", time: 5, excerpt: "Gerakan Tutup Mulut (GTM) adalah tantangan terbesar para orang tua. Kenali penyebabnya...", color: "#FF8A65" },
+            { id: 2, category: "MPASI", title: "Jadwal MPASI Bayi 6 Bulan Lengkap dengan Resep Mudah", time: 7, excerpt: "Memulai MPASI bisa terasa overwhelming. Panduan lengkap ini membantu Mama...", color: "#66BB6A" },
+            { id: 3, category: "Tumbuh", title: "Berat Badan Ideal Bayi per Bulan Menurut WHO dan Buku Pink", time: 4, excerpt: "Pantau pertumbuhan si kecil dengan tabel berat badan ideal sesuai standar WHO...", color: "#42A5F5" },
+            { id: 4, category: "Motorik", title: "Tahapan Perkembangan Motorik Bayi 0–12 Bulan", time: 6, excerpt: "Pahami milestone motorik penting yang perlu Mama perhatikan di tahun pertama.", color: "#AB47BC" },
+            { id: 5, category: "Kesehatan", title: "Anak 2 Tahun Belum Bisa Bicara — Normal atau Terlambat?", time: 5, excerpt: "Keterlambatan bicara bisa disebabkan berbagai faktor. Ketahui kapan perlu konsultasi.", color: "#EC407A" },
+            { id: 6, category: "Nutrisi", title: "10 Makanan Tinggi Zat Besi untuk Bayi 6–12 Bulan", time: 4, excerpt: "Zat besi sangat penting untuk otak. Ini daftar sumber makanan terbaik...", color: "#66BB6A" }
+        ];
+
+        const PRODUCTS = [
+            { title: "Ebook: 100 Resep MPASI Anti-GTM", price: "Rp 49.000", img: "#E8F5F0", desc: "Solusi lengkap menu lezat untuk anak susah makan." },
+            { title: "Planner Tumbuh Kembang PDF", price: "Rp 25.000", img: "#E3F2FD", desc: "Cetak sendiri di rumah, pantau setiap milestone." },
+            { title: "Bundle: Super Mama Kit", price: "Rp 69.000", img: "#FFF8E1", desc: "Kumpulan panduan terbaik untuk tahun pertama." }
+        ];
+
+        // --- ROUTER ---
+        const routes = {
+            'home': renderHome,
+            'tools': renderTools,
+            'download': renderDownload,
+            'article': renderArticle
+        };
+
+        function navigate() {
+            const hash = window.location.hash || '#/';
+            const route = hash.split('/')[1] || 'home';
+            const id = hash.split('/')[2];
+
+            window.scrollTo(0, 0);
+
+            if (routes[route]) {
+                routes[route](id);
+            } else {
+                renderHome();
+            }
+
+            // Update active link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.toggle('active', link.dataset.route === route);
+            });
+        }
+
+        window.addEventListener('hashchange', navigate);
+        window.addEventListener('DOMContentLoaded', navigate);
+
+        // --- RENDER FUNCTIONS ---
+
+        function renderHome() {
+            const content = document.getElementById('app-content');
+            content.innerHTML = `
+                <section class="hero">
+                    <div class="container hero-grid">
+                        <div class="hero-content">
+                            <div class="badge" style="background:var(--primary-light); color:var(--primary)">🌿 Parenting Terpercaya</div>
+                            <h1>Tumbuh Kembang Si Kecil, <span style="color:var(--primary)">Pantau Setiap Tahapnya</span></h1>
+                            <p>Informasi parenting berbasis sains, ditulis dengan bahasa yang mudah dipahami — karena setiap mama berhak punya teman yang informatif.</p>
+                            <div style="display:flex; gap:16px; flex-wrap:wrap">
+                                <a href="#/article/1" class="btn btn-primary">Atasi GTM Sekarang →</a>
+                                <a href="#/tools" class="btn btn-outline">Tools Gratis</a>
+                            </div>
+                        </div>
+                        <div class="hero-img">
+                            <svg viewBox="0 0 400 400" width="100%">
+                                <circle cx="200" cy="200" r="180" fill="var(--primary)" opacity="0.1"/>
+                                <circle cx="150" cy="150" r="40" fill="var(--accent)" opacity="0.6"/>
+                                <circle cx="250" cy="220" r="60" fill="var(--primary)" opacity="0.4"/>
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="container">
+                    <div class="ad-slot ad-leaderboard">Top Leaderboard Ad Slot #1</div>
+
+                    <section class="section-padding">
+                        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:32px">
+                            <h2>Artikel Terbaru</h2>
+                            <a href="#" style="color:var(--primary); font-weight:700">Lihat Semua →</a>
+                        </div>
+                        <div class="grid-3">
+                            ${ARTICLES.map(a => `
+                                <a href="#/article/${a.id}" class="card">
+                                    <div class="card-img" style="background:${a.color}20">
+                                        <span style="font-size:40px">📄</span>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="badge" style="background:${a.color}20; color:${a.color}">${a.category}</div>
+                                        <h3 style="margin-bottom:12px; line-height:1.4">${a.title}</h3>
+                                        <p style="font-size:14px; color:var(--text-muted); margin-bottom:20px">${a.excerpt}</p>
+                                        <div style="margin-top:auto; font-size:12px; color:var(--text-muted); font-weight:600">⏱ ${a.time} MENIT BACA</div>
+                                    </div>
+                                </a>
+                            `).join('')}
+                        </div>
+                    </section>
+
+                    <div class="ad-slot ad-native">Native Content Ad Slot #2</div>
+
+                    <section class="section-padding">
+                        <div class="shop-banner">
+                            <div style="max-width:500px">
+                                <h2 style="font-size:32px; margin-bottom:12px">Siapkan Ebook Panduan Parenting Mama</h2>
+                                <p style="opacity:0.8; margin-bottom:24px">Kumpulan resep MPASI, panduan mengatasi GTM, dan checklist milestone eksklusif dalam format digital siap pakai.</p>
+                                <div style="display:flex; gap:16px; margin-top:24px">
+                                    <a href="#/tools" class="btn btn-primary">Mulai Cek Tumbuh Kembang</a>
+                                </div>
+                            </div>
+                            <div style="font-size:100px">📚</div>
+                        </div>
+                    </section>
+
+                    <div class="ad-slot ad-leaderboard">Bottom Leaderboard Ad Slot #3</div>
+                </div>
+            `;
+        }
+
+        function renderArticle(id) {
+            const article = ARTICLES.find(a => a.id == id) || ARTICLES[0];
+            const isGTM = (id == 1 || article.category === 'GTM');
+            const content = document.getElementById('app-content');
+
+            // === ARTIKEL GTM — FULL CONVERSION FUNNEL ===
+            if (isGTM) {
+                content.innerHTML = `
+                <style>
+                    /* ========== ARTICLE GTM STYLES ========== */
+                    .art-hero {
+                        background: linear-gradient(160deg, #FFF9F0 0%, #FFF3E0 60%, #EAF6F1 100%);
+                        padding: 48px 0 0;
+                        border-bottom: 1px solid var(--border);
+                    }
+                    .art-hero-inner {
+                        max-width: 760px;
+                        margin: 0 auto;
+                        padding: 0 24px 40px;
+                    }
+                    .art-category-pill {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 6px;
+                        background: #FF8A6520;
+                        color: #D4602A;
+                        border: 1px solid #FF8A6540;
+                        padding: 5px 14px;
+                        border-radius: 20px;
+                        font-size: 12px;
+                        font-weight: 700;
+                        font-family: var(--font-display);
+                        text-transform: uppercase;
+                        letter-spacing: 0.06em;
+                        margin-bottom: 20px;
+                    }
+                    .art-title {
+                        font-size: clamp(28px, 4.5vw, 44px);
+                        line-height: 1.15;
+                        letter-spacing: -0.03em;
+                        color: var(--text-main);
+                        margin-bottom: 20px;
+                        font-family: var(--font-display);
+                    }
+                    .art-title em {
+                        color: var(--primary);
+                        font-style: normal;
+                    }
+                    .art-lead {
+                        font-size: 18px;
+                        line-height: 1.7;
+                        color: #555550;
+                        margin-bottom: 28px;
+                        font-family: var(--font-body);
+                        border-left: 4px solid var(--accent);
+                        padding-left: 20px;
+                    }
+                    .art-meta {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                        font-size: 13px;
+                        color: var(--text-muted);
+                        font-family: var(--font-display);
+                        flex-wrap: wrap;
+                    }
+                    .art-meta-sep { color: #ccc; }
+                    .art-meta strong { color: var(--text-main); }
+
+                    /* Progress bar */
+                    .read-progress {
+                        position: fixed;
+                        top: 70px; left: 0;
+                        height: 3px;
+                        background: var(--primary);
+                        width: 0%;
+                        transition: width 0.1s linear;
+                        z-index: 999;
+                    }
+
+                    /* Article layout */
+                    .art-layout {
+                        display: grid;
+                        grid-template-columns: 1fr 300px;
+                        gap: 48px;
+                        max-width: 1100px;
+                        margin: 0 auto;
+                        padding: 48px 24px 80px;
+                        align-items: start;
+                    }
+                    @media (max-width: 900px) {
+                        .art-layout { grid-template-columns: 1fr; }
+                        .art-sidebar { display: none; }
+                    }
+
+                    /* Article body typography */
+                    .art-body { font-size: 17px; line-height: 1.85; color: #3a3a38; }
+                    .art-body p { margin-bottom: 22px; }
+                    .art-body h2 {
+                        font-size: 24px;
+                        font-weight: 800;
+                        color: var(--text-main);
+                        margin: 48px 0 18px;
+                        padding-bottom: 10px;
+                        border-bottom: 2px solid var(--border);
+                        font-family: var(--font-display);
+                        letter-spacing: -0.02em;
+                    }
+                    .art-body h3 {
+                        font-size: 19px;
+                        font-weight: 700;
+                        color: var(--text-main);
+                        margin: 32px 0 12px;
+                        font-family: var(--font-display);
+                    }
+
+                    /* Fact box — trust builder */
+                    .fact-box {
+                        background: #F0F9F5;
+                        border: 1px solid #C6E8DA;
+                        border-radius: 14px;
+                        padding: 22px 26px;
+                        margin: 32px 0;
+                        display: flex;
+                        gap: 16px;
+                        align-items: flex-start;
+                    }
+                    .fact-box-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+                    .fact-box-text { font-size: 15px; line-height: 1.6; }
+                    .fact-box-text strong { color: var(--primary-dark); display: block; margin-bottom: 4px; font-family: var(--font-display); }
+
+                    /* Warning box */
+                    .warn-box {
+                        background: #FFF8E1;
+                        border: 1px solid #F9A82550;
+                        border-left: 4px solid var(--accent);
+                        border-radius: 0 12px 12px 0;
+                        padding: 18px 22px;
+                        margin: 28px 0;
+                        font-size: 15px;
+                        line-height: 1.6;
+                    }
+                    .warn-box strong { color: #A06000; font-family: var(--font-display); }
+
+                    /* Cause cards */
+                    .cause-grid {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 14px;
+                        margin: 24px 0 32px;
+                    }
+                    @media (max-width: 600px) { .cause-grid { grid-template-columns: 1fr; } }
+                    .cause-card {
+                        background: white;
+                        border: 1px solid var(--border);
+                        border-radius: 12px;
+                        padding: 18px;
+                        display: flex;
+                        gap: 14px;
+                        align-items: flex-start;
+                        transition: 0.2s;
+                    }
+                    .cause-card:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); }
+                    .cause-num {
+                        background: var(--primary);
+                        color: white;
+                        width: 28px; height: 28px;
+                        border-radius: 8px;
+                        display: flex; align-items: center; justify-content: center;
+                        font-size: 13px; font-weight: 800;
+                        flex-shrink: 0;
+                        font-family: var(--font-display);
+                    }
+                    .cause-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; font-family: var(--font-display); }
+                    .cause-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+                    /* Step list */
+                    .step-list { list-style: none; padding: 0; margin: 24px 0; }
+                    .step-list li {
+                        display: flex;
+                        gap: 16px;
+                        padding: 16px 0;
+                        border-bottom: 1px solid var(--border);
+                        align-items: flex-start;
+                    }
+                    .step-list li:last-child { border-bottom: none; }
+                    .step-badge {
+                        background: var(--primary-light);
+                        color: var(--primary-dark);
+                        font-size: 12px; font-weight: 800;
+                        padding: 4px 10px;
+                        border-radius: 20px;
+                        white-space: nowrap;
+                        margin-top: 2px;
+                        font-family: var(--font-display);
+                    }
+                    .step-list h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; font-family: var(--font-display); }
+                    .step-list p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+
+                    /* ======= INLINE CTA #1 — SOFT (after problem section) ======= */
+                    .cta-inline-soft {
+                        background: linear-gradient(135deg, #FFFBF0 0%, #FFF8E8 100%);
+                        border: 1px solid #F9A82530;
+                        border-left: 4px solid var(--accent);
+                        border-radius: 0 16px 16px 0;
+                        padding: 24px 28px;
+                        margin: 40px 0;
+                        display: flex;
+                        gap: 20px;
+                        align-items: center;
+                        flex-wrap: wrap;
+                    }
+                    .cta-inline-soft-text { flex: 1; min-width: 200px; }
+                    .cta-inline-soft-text p { font-size: 14px; color: var(--text-muted); margin: 6px 0 14px; line-height: 1.5; }
+                    .cta-inline-soft-text h3 { font-size: 17px; font-family: var(--font-display); }
+                    .cta-inline-soft .btn { white-space: nowrap; }
+
+                    /* ======= INLINE CTA #2 — MEDIUM (after solution) ======= */
+                    .cta-mid {
+                        background: white;
+                        border: 2px solid var(--primary);
+                        border-radius: 20px;
+                        padding: 32px;
+                        margin: 48px 0;
+                        text-align: center;
+                        position: relative;
+                        overflow: hidden;
+                    }
+                    .cta-mid::before {
+                        content: '';
+                        position: absolute; top: 0; left: 0; right: 0;
+                        height: 4px;
+                        background: linear-gradient(90deg, var(--primary), var(--accent));
+                    }
+                    .cta-mid .cta-badge {
+                        display: inline-block;
+                        background: #FFF3CD;
+                        color: #856404;
+                        font-size: 11px; font-weight: 700;
+                        padding: 4px 12px; border-radius: 20px;
+                        margin-bottom: 14px;
+                        font-family: var(--font-display);
+                        text-transform: uppercase; letter-spacing: 0.06em;
+                    }
+                    .cta-mid h3 { font-size: 22px; font-family: var(--font-display); margin-bottom: 10px; }
+                    .cta-mid p { color: var(--text-muted); font-size: 15px; margin-bottom: 20px; line-height: 1.6; max-width: 480px; margin-left: auto; margin-right: auto; }
+                    .cta-mid-items {
+                        display: flex;
+                        justify-content: center;
+                        gap: 10px;
+                        flex-wrap: wrap;
+                        margin-bottom: 24px;
+                    }
+                    .cta-mid-item {
+                        background: var(--primary-light);
+                        color: var(--primary-dark);
+                        padding: 6px 14px;
+                        border-radius: 20px;
+                        font-size: 13px; font-weight: 600;
+                        font-family: var(--font-display);
+                    }
+                    .cta-mid-price {
+                        font-size: 13px; color: var(--text-muted); margin-bottom: 6px;
+                    }
+                    .cta-mid-price s { color: #bbb; }
+                    .cta-mid-price strong { color: var(--primary); font-size: 28px; font-family: var(--font-display); font-weight: 900; }
+
+                    /* Testimonials strip */
+                    .testi-strip {
+                        background: #F7F7F5;
+                        border-radius: 16px;
+                        padding: 28px;
+                        margin: 40px 0;
+                    }
+                    .testi-strip h4 { font-size: 14px; color: var(--text-muted); margin-bottom: 18px; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.06em; }
+                    .testi-list { display: flex; flex-direction: column; gap: 16px; }
+                    .testi-item { background: white; border-radius: 12px; padding: 16px 20px; border: 1px solid var(--border); }
+                    .testi-stars { color: var(--accent); font-size: 13px; margin-bottom: 6px; }
+                    .testi-text { font-size: 14px; line-height: 1.6; color: #444; font-style: italic; margin-bottom: 8px; }
+                    .testi-author { font-size: 12px; font-weight: 700; color: var(--text-muted); font-family: var(--font-display); }
+
+                    /* ======= BOTTOM CTA — HARD SELL ======= */
+                    .cta-bottom {
+                        background: linear-gradient(135deg, #1C1C1A 0%, #2A2A28 100%);
+                        border-radius: 24px;
+                        padding: 48px 40px;
+                        text-align: center;
+                        margin: 56px 0 16px;
+                        position: relative;
+                        overflow: hidden;
+                    }
+                    .cta-bottom::before {
+                        content: '';
+                        position: absolute; inset: 0;
+                        background: radial-gradient(ellipse at 50% 0%, rgba(59,173,138,0.2) 0%, transparent 60%);
+                        pointer-events: none;
+                    }
+                    .cta-bottom .urgency-badge {
+                        display: inline-flex; align-items: center; gap: 6px;
+                        background: rgba(249, 168, 37, 0.15);
+                        border: 1px solid rgba(249, 168, 37, 0.3);
+                        color: var(--accent);
+                        padding: 6px 16px; border-radius: 20px;
+                        font-size: 12px; font-weight: 700;
+                        font-family: var(--font-display);
+                        margin-bottom: 20px;
+                        text-transform: uppercase; letter-spacing: 0.06em;
+                    }
+                    .cta-bottom h2 { color: white; font-size: clamp(22px, 3vw, 32px); margin-bottom: 14px; line-height: 1.3; font-family: var(--font-display); }
+                    .cta-bottom p { color: rgba(255,255,255,0.65); font-size: 15px; margin-bottom: 32px; line-height: 1.6; max-width: 500px; margin-left: auto; margin-right: auto; }
+                    .bundle-items-dark {
+                        display: flex;
+                        justify-content: center;
+                        gap: 8px;
+                        flex-wrap: wrap;
+                        margin-bottom: 28px;
+                    }
+                    .bundle-item-dark {
+                        background: rgba(255,255,255,0.08);
+                        border: 1px solid rgba(255,255,255,0.12);
+                        color: rgba(255,255,255,0.85);
+                        padding: 8px 16px; border-radius: 10px;
+                        font-size: 13px; font-weight: 600;
+                        font-family: var(--font-display);
+                        display: flex; align-items: center; gap: 6px;
+                    }
+                    .cta-bottom-price {
+                        margin-bottom: 28px;
+                    }
+                    .cta-bottom-price .old { color: rgba(255,255,255,0.35); font-size: 16px; text-decoration: line-through; margin-bottom: 4px; }
+                    .cta-bottom-price .new { color: white; font-size: 42px; font-weight: 900; font-family: var(--font-display); line-height: 1; }
+                    .cta-bottom-price .per { color: rgba(255,255,255,0.5); font-size: 13px; margin-top: 4px; }
+                    .btn-cta-main {
+                        display: inline-flex; align-items: center; gap: 10px;
+                        background: var(--primary);
+                        color: white;
+                        padding: 18px 40px;
+                        border-radius: 14px;
+                        font-size: 17px; font-weight: 800;
+                        font-family: var(--font-display);
+                        box-shadow: 0 8px 32px rgba(59,173,138,0.4);
+                        transition: all 0.25s;
+                        border: none; cursor: pointer;
+                        text-decoration: none;
+                    }
+                    .btn-cta-main:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(59,173,138,0.5); }
+                    .cta-guarantee {
+                        margin-top: 16px;
+                        color: rgba(255,255,255,0.4);
+                        font-size: 12px;
+                        font-family: var(--font-display);
+                    }
+
+                    /* Related articles */
+                    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+                    @media (max-width: 600px) { .related-grid { grid-template-columns: 1fr; } }
+                    .related-card {
+                        background: white;
+                        border: 1px solid var(--border);
+                        border-radius: 12px; padding: 18px;
+                        transition: 0.2s; cursor: pointer;
+                    }
+                    .related-card:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); }
+                    .related-card .rc-cat { font-size: 11px; font-weight: 700; color: var(--primary); font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+                    .related-card h4 { font-size: 14px; font-weight: 700; line-height: 1.4; font-family: var(--font-display); }
+
+                    /* Sidebar */
+                    .art-sidebar { font-size: 14px; }
+                    .sidebar-card {
+                        background: white;
+                        border: 1px solid var(--border);
+                        border-radius: 16px; padding: 24px;
+                        margin-bottom: 24px;
+                    }
+                    .sidebar-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 16px; font-family: var(--font-display); }
+                    .sidebar-toc { list-style: none; padding: 0; }
+                    .sidebar-toc li { padding: 8px 0; border-bottom: 1px solid var(--border); }
+                    .sidebar-toc li:last-child { border-bottom: none; }
+                    .sidebar-toc a { color: var(--text-muted); font-size: 13px; display: flex; gap: 8px; align-items: flex-start; }
+                    .sidebar-toc a:hover { color: var(--primary); }
+                    .toc-num { color: var(--primary); font-weight: 700; flex-shrink: 0; font-family: var(--font-display); }
+                    .sidebar-product {
+                        background: linear-gradient(160deg, #1C1C1A 0%, #2C2C2A 100%);
+                        border-radius: 16px; padding: 24px; text-align: center;
+                        margin-bottom: 24px; position: relative; overflow: hidden;
+                    }
+                    .sidebar-product::before {
+                        content: ''; position: absolute; top: -30px; right: -30px;
+                        width: 100px; height: 100px;
+                        background: rgba(59,173,138,0.2); border-radius: 50%;
+                    }
+                    .sidebar-product .sp-badge {
+                        display: inline-block;
+                        background: rgba(249,168,37,0.2);
+                        color: var(--accent);
+                        font-size: 10px; font-weight: 700;
+                        padding: 3px 10px; border-radius: 20px;
+                        margin-bottom: 12px;
+                        font-family: var(--font-display);
+                        text-transform: uppercase; letter-spacing: 0.06em;
+                    }
+                    .sidebar-product h4 { color: white; font-size: 16px; margin-bottom: 8px; font-family: var(--font-display); }
+                    .sidebar-product p { color: rgba(255,255,255,0.55); font-size: 12px; line-height: 1.5; margin-bottom: 16px; }
+                    .sidebar-product .sp-price { color: white; font-size: 26px; font-weight: 900; font-family: var(--font-display); margin-bottom: 16px; }
+                    .sidebar-product .sp-items { margin-bottom: 18px; text-align: left; }
+                    .sidebar-product .sp-item { color: rgba(255,255,255,0.7); font-size: 12px; padding: 4px 0; display: flex; gap: 8px; align-items: center; }
+                    .sidebar-product .sp-item::before { content: '✓'; color: var(--primary); font-weight: 700; }
+                    .btn-sidebar-buy {
+                        display: block; width: 100%;
+                        background: var(--primary); color: white;
+                        padding: 12px; border-radius: 10px;
+                        font-size: 14px; font-weight: 800;
+                        font-family: var(--font-display);
+                        text-align: center; border: none; cursor: pointer;
+                        transition: 0.2s;
+                    }
+                    .btn-sidebar-buy:hover { background: var(--primary-dark); }
+                </style>
+
+                <!-- Reading Progress Bar -->
+                <div class="read-progress" id="readProgress"></div>
+
+                <!-- Article Hero -->
+                <div class="art-hero">
+                    <div class="art-hero-inner">
+                        <div class="art-category-pill">🍽️ GTM & Nutrisi Anak</div>
+                        <h1 class="art-title">Anak GTM? Ini <em>7 Penyebab Nyata</em> dan Cara Mengatasinya yang Terbukti Berhasil</h1>
+                        <p class="art-lead">Mama udah coba berbagai cara tapi si kecil tetap GTM? Bukan salah Mama. Setelah membaca ini, Mama akan tahu persis <strong>apa yang terjadi</strong> dan langkah apa yang benar-benar bekerja.</p>
+                        <div class="art-meta">
+                            <div style="width:36px; height:36px; border-radius:50%; background:var(--primary-light); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;">👩‍⚕️</div>
+                            <div>
+                                <strong>Tim tumbuhkembang.online</strong>
+                                <span class="art-meta-sep">·</span> Diperbarui 5 Mei 2025
+                            </div>
+                            <span class="art-meta-sep">·</span>
+                            <span>⏱ 7 menit baca</span>
+                            <span class="art-meta-sep">·</span>
+                            <span>👁 12.4K dibaca</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article Content + Sidebar -->
+                <div class="art-layout">
+                    <!-- MAIN CONTENT -->
+                    <article class="art-body" id="articleBody">
+
+                        <div class="ad-slot ad-leaderboard" style="margin-bottom:32px">In-Article Ad Slot #4</div>
+
+                        <p>Mama pernah ngerasa frustrasi sampai mau nangis karena si kecil nolak makan? Udah masak susah-susah, disuapin dengan sabar, tapi ujung-ujungnya makanan dibuang atau mulut minta tutup rapet?</p>
+
+                        <p>GTM — Gerakan Tutup Mulut — bukan cuma bikin Mama capek secara fisik. Ini juga menguras mental dan bikin khawatir soal tumbuh kembang si kecil.</p>
+
+                        <div class="fact-box">
+                            <div class="fact-box-icon">📊</div>
+                            <div class="fact-box-text">
+                                <strong>Fakta: GTM itu SANGAT UMUM</strong>
+                                Studi menunjukkan hingga 50% orang tua pernah mengalami GTM pada anak di bawah 3 tahun. Ini bukan tanda ada yang salah dengan anak Mama — ini fase perkembangan yang normal dan bisa diatasi.
+                            </div>
+                        </div>
+
+                        <p>Yang perlu Mama tahu: GTM hampir selalu punya <strong>penyebab spesifik</strong>. Begitu kita tahu penyebabnya, solusinya jadi jauh lebih jelas.</p>
+
+                        <!-- ===== SECTION 1 ===== -->
+                        <h2 id="sec-penyebab">7 Penyebab GTM yang Sering Diabaikan</h2>
+
+                        <div class="cause-grid">
+                            <div class="cause-card">
+                                <div class="cause-num">1</div>
+                                <div>
+                                    <h4>🦷 Tumbuh Gigi</h4>
+                                    <p>Nyeri di gusi bisa membuat bayi sangat tidak nyaman saat mengunyah. Ini penyebab GTM paling sering di usia 4–18 bulan.</p>
+                                </div>
+                            </div>
+                            <div class="cause-card">
+                                <div class="cause-num">2</div>
+                                <div>
+                                    <h4>😰 Food Neophobia</h4>
+                                    <p>Ketakutan terhadap makanan baru — ini respon alami otak anak. Perlu 10–15 kali paparan sebelum anak mau mencoba.</p>
+                                </div>
+                            </div>
+                            <div class="cause-card">
+                                <div class="cause-num">3</div>
+                                <div>
+                                    <h4>🍼 Kenyang ASI/Sufor</h4>
+                                    <p>Anak yang ASI/sufor on-demand mungkin tidak cukup lapar saat jam makan. Perlu diatur jarak pemberian.</p>
+                                </div>
+                            </div>
+                            <div class="cause-card">
+                                <div class="cause-num">4</div>
+                                <div>
+                                    <h4>📱 Terbiasa Distraksi</h4>
+                                    <p>Anak yang sering makan sambil nonton merasa tidak nyaman makan tanpa layar. Fokus makannya tidak terlatih.</p>
+                                </div>
+                            </div>
+                            <div class="cause-card">
+                                <div class="cause-num">5</div>
+                                <div>
+                                    <h4>🧠 Sensori Sensitif</h4>
+                                    <p>Beberapa anak sangat sensitif terhadap tekstur, warna, atau aroma tertentu — ini bukan manja, ini neurologis.</p>
+                                </div>
+                            </div>
+                            <div class="cause-card">
+                                <div class="cause-num">6</div>
+                                <div>
+                                    <h4>😨 Trauma Makan</h4>
+                                    <p>Pernah tersedak, dipaksa makan, atau mual bisa membuat anak membangun asosiasi negatif dengan makan.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="warn-box">
+                            <strong>⚠️ Kapan GTM Perlu ke Dokter?</strong><br>
+                            Segera konsultasi jika: BB terus turun lebih dari 2 bulan, anak terlihat lemas & lesu, menolak semua jenis makanan lebih dari 1 bulan, atau muntah setiap kali makan.
+                        </div>
+
+                        <!-- ===== SOFT CTA #1 ===== -->
+                        <div class="cta-inline-soft">
+                            <div style="font-size: 40px; flex-shrink: 0;">📋</div>
+                            <div class="cta-inline-soft-text">
+                                <h3>Bingung mulai dari mana?</h3>
+                                <p>Download <strong>Log Makan Harian</strong> gratis untuk lacak pola GTM si kecil — bantu identifikasi penyebab lebih akurat.</p>
+                                <a href="#/download" class="btn btn-primary" style="font-size:14px; padding:10px 20px;">Lihat Panduan Lengkap →</a>
+                            </div>
+                        </div>
+
+                        <!-- ===== SECTION 2 ===== -->
+                        <h2 id="sec-solusi">8 Strategi Mengatasi GTM yang Terbukti Berhasil</h2>
+
+                        <p>Tidak ada magic trick. Yang ada adalah <strong>pendekatan yang konsisten dan sabar</strong>. Ini 8 strategi yang didukung penelitian dan terbukti membantu ribuan keluarga Indonesia:</p>
+
+                        <ul class="step-list">
+                            <li>
+                                <span class="step-badge">Strategi 1</span>
+                                <div>
+                                    <h4>Terapkan Division of Responsibility (DoR)</h4>
+                                    <p>Mama tentukan <em>apa</em> yang dimakan, <em>kapan</em>, dan <em>di mana</em>. Anak yang menentukan <em>berapa banyak</em>. Jangan paksa habiskan makanan — ini kunci kepercayaan.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-badge">Strategi 2</span>
+                                <div>
+                                    <h4>Jadwal Makan Terstruktur (Bukan On Demand)</h4>
+                                    <p>Makan pada jam yang sama setiap hari — pagi, siang, sore. Jarak 2.5–3 jam antar sesi. Tubuh bayi akan belajar lapar di waktu yang tepat.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-badge">Strategi 3</span>
+                                <div>
+                                    <h4>Exposure Berulang Tanpa Tekanan</h4>
+                                    <p>Sajikan makanan yang sama 10–15 kali tanpa memaksa. Taruh di piring, biarkan anak menyentuh, mencium, mengamati dulu. Jangan bereaksi berlebihan saat ditolak.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-badge">Strategi 4</span>
+                                <div>
+                                    <h4>Makan Bersama Keluarga</h4>
+                                    <p>Bayi belajar 80% dengan observasi. Makan semeja dengan orang tua yang makan dengan antusias adalah strategi paling efektif dan paling gratis.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-badge">Strategi 5</span>
+                                <div>
+                                    <h4>Zero Distraksi Layar</h4>
+                                    <p>Matikan TV, sembunyikan HP. Waktu makan = waktu untuk rasa dan sosial. Anak yang terbiasa distraksi perlu 2–4 minggu untuk beradaptasi — sabar!</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-badge">Strategi 6</span>
+                                <div>
+                                    <h4>Variasi Tampilan & Tekstur</h4>
+                                    <p>Sajikan makanan yang sama dengan cara berbeda. Wortel bisa dikukus, dipanggang, diparut. Variasi tampilan merangsang rasa ingin tahu anak.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-badge">Strategi 7</span>
+                                <div>
+                                    <h4>Libatkan Anak dalam Proses Masak</h4>
+                                    <p>Anak usia 10 bulan+ bisa diajak cuci sayur, melihat proses masak, memegang bahan. Keterlibatan meningkatkan kemauan makan drastis.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-badge">Strategi 8</span>
+                                <div>
+                                    <h4>Reaksi Netral Mama = Kunci</h4>
+                                    <p>Jangan bereaksi berlebihan saat anak GTM — baik marah, memohon, maupun bersorak. Reaksi dramatis memperkuat perilaku. Tetap tenang, tarik makanan, coba lagi besok.</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="fact-box">
+                            <div class="fact-box-icon">💡</div>
+                            <div class="fact-box-text">
+                                <strong>Pro Tip: Lacak Pola GTM Selama 2 Minggu</strong>
+                                Catat apa yang dimakan anak, jam makan, mood, dan porsi setiap hari. Setelah 2 minggu, Mama akan mulai melihat pola — makanan apa yang konsisten ditolak, jam berapa anak paling mau makan, dan apa yang mempengaruhi nafsu makannya.
+                            </div>
+                        </div>
+
+                        <!-- ===== SECTION 3 ===== -->
+                        <h2 id="sec-mpasi">Koneksi GTM dengan MPASI yang Salah Dimulai</h2>
+
+                        <p>Banyak kasus GTM berakar dari <strong>MPASI yang dimulai dengan cara kurang tepat</strong>: tekstur terlalu halus terlalu lama, variasi terlalu sedikit di awal, atau paparan makanan baru yang terlalu terburu-buru.</p>
+
+                        <p>Panduan MPASI WHO merekomendasikan:</p>
+                        <ul style="padding-left: 24px; margin-bottom: 24px;">
+                            <li style="margin-bottom: 10px;"><strong>6 bulan:</strong> Mulai puree halus, 2× sehari, 2–3 sendok makan</li>
+                            <li style="margin-bottom: 10px;"><strong>7–8 bulan:</strong> Cincang halus/bubur kental, 3× sehari + 1 snack</li>
+                            <li style="margin-bottom: 10px;"><strong>9–11 bulan:</strong> Finger food potongan kecil, 3× makan + 2 snack</li>
+                            <li style="margin-bottom: 10px;"><strong>12 bulan+:</strong> Makanan keluarga yang dicincang, 3× + 2 snack</li>
+                        </ul>
+
+                        <p>Transisi tekstur yang terlambat adalah salah satu pemicu terbesar GTM jangka panjang. Anak yang terlalu lama di tekstur halus sulit menerima makanan bertekstur saat besar.</p>
+
+                        <!-- ===== SOCIAL PROOF ===== -->
+                        <div class="testi-strip">
+                            <h4>💬 Mama Lain Berhasil — Ini Cerita Mereka</h4>
+                            <div class="testi-list">
+                                <div class="testi-item">
+                                    <div class="testi-stars">★★★★★</div>
+                                    <div class="testi-text">"Awalnya anak saya GTM parah, sampe 3 minggu ga mau makan sama sekali. Setelah ikutin panduan ini, terutama strategi DoR dan zero gadget, dalam seminggu udah mulai mau makan sendiri!"</div>
+                                    <div class="testi-author">— Bunda Reni, Mama dari Kenzie (14 bulan) · Surabaya</div>
+                                </div>
+                                <div class="testi-item">
+                                    <div class="testi-stars">★★★★★</div>
+                                    <div class="testi-text">"Yang paling membantu adalah Log Makan Hariannya. Baru seminggu dicatat, langsung ketahuan kalau anak saya GTM selalu di jam siang karena masih ngantuk. Sekarang jam makannya digeser, langsung beres!"</div>
+                                    <div class="testi-author">— Bunda Sari, Mama dari Azka (10 bulan) · Bandung</div>
+                                </div>
+                                <div class="testi-item">
+                                    <div class="testi-stars">★★★★★</div>
+                                    <div class="testi-text">"Bundle Super Mama Kit-nya worth it banget. Kalender MPASI-nya bantu banget buat rencanain menu mingguan, jadi ga bingung tiap hari mau masak apa."</div>
+                                    <div class="testi-author">— Bunda Dita, Mama dari Nayla (8 bulan) · Jakarta</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ===== MID CTA #2 ===== -->
+                        <div class="cta-mid">
+                            <div class="cta-badge">⚡ Solusi Praktis untuk Mama</div>
+                            <h3>Sudah Baca Artikelnya — Sekarang Butuh Alat Bantu Nyata</h3>
+                            <p>Artikel ini kasih tahu <em>apa</em> yang perlu dilakukan. Bundle Super Mama Kit kasih Mama <em>bagaimana caranya</em> — dengan template, kalender, dan panduan siap pakai.</p>
+                            <div class="cta-mid-items">
+                                <div class="cta-mid-item">📄 Panduan GTM Lengkap</div>
+                                <div class="cta-mid-item">📊 Chart BB/TB WHO</div>
+                                <div class="cta-mid-item">📋 Log Makan Harian</div>
+                                <div class="cta-mid-item">🗓️ Kalender MPASI</div>
+                            </div>
+                            <div class="cta-mid-price">
+                                <div>4 panduan PDF siap cetak, hemat vs beli satuan</div>
+                                <strong>Rp 25.000</strong>
+                            </div>
+                            <a href="#/download" class="btn btn-primary" style="font-size:16px; padding:14px 32px; border-radius:12px;">Lihat Detail Bundle →</a>
+                        </div>
+
+                        <!-- ===== SECTION 4 — WHEN TO WORRY ===== -->
+                        <h2 id="sec-kapan">Ringkasan: GTM Wajar vs Perlu Ditangani</h2>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;">
+                            <div style="background: #F0FDF4; border: 1px solid #C6F6D5; border-radius: 12px; padding: 20px;">
+                                <h3 style="color: #276749; font-size: 15px; margin: 0 0 14px;">✅ GTM Wajar</h3>
+                                <ul style="font-size: 13px; padding-left: 18px; color: #4a5568; line-height: 1.8;">
+                                    <li>Menolak 1–2 jenis makanan</li>
+                                    <li>BB naik sesuai kurva WHO</li>
+                                    <li>Aktif, ceria, tidak lemas</li>
+                                    <li>Berlangsung &lt; 3 minggu</li>
+                                    <li>Mau makan setelah 2–3 tawaran</li>
+                                </ul>
+                            </div>
+                            <div style="background: #FFF5F5; border: 1px solid #FED7D7; border-radius: 12px; padding: 20px;">
+                                <h3 style="color: #C53030; font-size: 15px; margin: 0 0 14px;">🚨 Segera ke Dokter</h3>
+                                <ul style="font-size: 13px; padding-left: 18px; color: #4a5568; line-height: 1.8;">
+                                    <li>BB terus turun &gt; 2 bulan</li>
+                                    <li>Anak lemas, pucat, lesu</li>
+                                    <li>Muntah setiap kali makan</li>
+                                    <li>Menolak semua makanan</li>
+                                    <li>GTM lebih dari 1 bulan</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- ===== BOTTOM HARD CTA ===== -->
+                        <div class="cta-bottom">
+                            <div class="urgency-badge">🎯 Rekomendasi untuk Mama</div>
+                            <h2>Dapatkan Semua Panduan dalam Satu Bundle Lengkap</h2>
+                            <p>4 panduan PDF berkualitas tinggi, siap cetak dan langsung pakai. Bantu Mama mengatasi GTM dengan lebih terstruktur dan percaya diri.</p>
+                            <div class="bundle-items-dark">
+                                <div class="bundle-item-dark">📄 Panduan GTM Lengkap</div>
+                                <div class="bundle-item-dark">📊 Chart BB/TB WHO</div>
+                                <div class="bundle-item-dark">📋 Log Makan Harian</div>
+                                <div class="bundle-item-dark">🗓️ Kalender MPASI</div>
+                            </div>
+                            <div class="cta-bottom-price">
+                                <div class="old">Jika beli satuan: Rp 40.000</div>
+                                <div class="new">Rp 25.000</div>
+                                <div class="per">Sekali bayar · Download selamanya · Siap cetak</div>
+                            </div>
+                            <a href="#/download" class="btn-cta-main">🛍️ Dapatkan Bundle Sekarang</a>
+                            <div class="cta-guarantee">📦 Download instan setelah pembayaran · Format PDF high resolution</div>
+                        </div>
+
+                        <!-- Related Articles -->
+                        <div style="margin-top: 48px;">
+                            <h3 style="font-size: 18px; margin-bottom: 4px; font-family: var(--font-display);">Artikel Terkait untuk Mama</h3>
+                            <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">Baca juga artikel ini untuk melengkapi pengetahuan Mama:</p>
+                            <div class="related-grid">
+                                ${ARTICLES.filter(a => a.id != 1).slice(0, 4).map(a => `
+                                <a href="#/article/${a.id}" class="related-card">
+                                    <div class="rc-cat">${a.category}</div>
+                                    <h4>${a.title}</h4>
+                                </a>`).join('')}
+                            </div>
+                        </div>
+
+                        <div class="ad-slot ad-leaderboard" style="margin-top:48px">Bottom Article Ad Slot #6</div>
+                    </article>
+
+                    <!-- SIDEBAR -->
+                    <aside class="art-sidebar">
+                        <div class="sidebar-sticky">
+                            <!-- Table of Contents -->
+                            <div class="sidebar-card">
+                                <h4>📑 Daftar Isi</h4>
+                                <ul class="sidebar-toc">
+                                    <li><a href="#sec-penyebab"><span class="toc-num">01</span> 7 Penyebab GTM</a></li>
+                                    <li><a href="#sec-solusi"><span class="toc-num">02</span> 8 Strategi Mengatasi</a></li>
+                                    <li><a href="#sec-mpasi"><span class="toc-num">03</span> Koneksi GTM & MPASI</a></li>
+                                    <li><a href="#sec-kapan"><span class="toc-num">04</span> GTM Wajar vs Darurat</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Sidebar Product Card -->
+                            <div class="sidebar-product">
+                                <div class="sp-badge">⭐ Terlaris</div>
+                                <h4>Bundle Super Mama Kit</h4>
+                                <p>4 panduan lengkap untuk atasi GTM dan pantau tumbuh kembang si kecil</p>
+                                <div class="sp-items">
+                                    <div class="sp-item">Panduan GTM Lengkap (PDF)</div>
+                                    <div class="sp-item">Chart BB/TB WHO Standar</div>
+                                    <div class="sp-item">Log Makan Harian Tracker</div>
+                                    <div class="sp-item">Kalender MPASI 6–12 Bln</div>
+                                </div>
+                                <div class="sp-price">Rp 25.000</div>
+                                <a href="#/download" class="btn-sidebar-buy">Dapatkan Sekarang →</a>
+                            </div>
+
+                            <!-- Ad slot -->
+                            <div class="ad-slot ad-rect">Sidebar Ad Slot #7</div>
+
+                            <!-- Free Tools Promo -->
+                            <div class="sidebar-card" style="margin-top: 24px; background: var(--primary-light); border-color: var(--primary);">
+                                <h4 style="color: var(--primary-dark);">🛠️ Tools Gratis untuk Mama</h4>
+                                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5;">Cek status gizi dan plot grafik pertumbuhan anak sesuai standar WHO — 100% gratis.</p>
+                                <a href="#/tools" class="btn btn-primary" style="width: 100%; text-align: center; font-size: 13px; padding: 10px;">Coba Tools Gratis →</a>
+                            </div>
+
+                            <div class="ad-slot ad-rect" style="margin-top:24px">Sidebar Ad Slot #8</div>
+                        </div>
+                    </aside>
+                </div>
+                `;
+
+                // Reading progress bar
+                const progressBar = document.getElementById('readProgress');
+                const articleBody = document.getElementById('articleBody');
+                if (progressBar && articleBody) {
+                    window.onscroll = function () {
+                        const rect = articleBody.getBoundingClientRect();
+                        const articleHeight = articleBody.offsetHeight;
+                        const scrolled = -rect.top;
+                        const progress = Math.min(100, Math.max(0, (scrolled / (articleHeight - window.innerHeight)) * 100));
+                        progressBar.style.width = progress + '%';
+                    };
+                }
+                return;
+            }
+
+            // === ARTIKEL LAIN — Layout default ===
+            content.innerHTML = `
+                <div class="container layout-with-sidebar">
+                    <div>
+                        <div style="margin-bottom:20px; font-size:14px">
+                            <a href="#/" style="color:var(--text-muted)">Beranda</a> / 
+                            <a href="#/" style="color:var(--text-muted)">Artikel</a> / 
+                            <span style="color:var(--primary); font-weight:700">${article.category}</span>
+                        </div>
+                        <h1 style="font-size:clamp(28px, 4vw, 42px); line-height:1.2; margin-bottom:24px">${article.title}</h1>
+                        <div style="display:flex; align-items:center; gap:16px; margin-bottom:32px; padding-bottom:20px; border-bottom:1px solid var(--border)">
+                            <div style="width:40px; height:40px; border-radius:50%; background:var(--primary-light); display:flex; align-items:center; justify-content:center; font-size:20px">👩</div>
+                            <div>
+                                <div style="font-weight:700; font-size:14px">Tim tumbuhkembang.online</div>
+                                <div style="font-size:12px; color:var(--text-muted)">Diperbarui: 2 Mei 2025</div>
+                            </div>
+                            <div style="margin-left:auto; display:flex; gap:8px">
+                                <span class="badge" style="background:#f0f0f0">⏱ ${article.time} Menit</span>
+                                <span class="badge" style="background:#f0f0f0">👁 4.5K Baca</span>
+                            </div>
+                        </div>
+                        <div class="ad-slot ad-leaderboard">In-Article Ad Slot #4</div>
+                        <div style="font-size:17px; line-height:1.8; color:#3a3a38">
+                            <p style="margin-bottom:24px">${article.excerpt} Pelajari lebih lanjut dalam panduan lengkap ini.</p>
+                            <div style="background:#FFF8E1; border:1px solid #F9A825; padding:24px; border-radius:12px; margin:40px 0; display:flex; gap:20px; align-items:center; flex-wrap:wrap">
+                                <div style="font-size:48px">🛍️</div>
+                                <div style="flex:1; min-width:250px">
+                                    <h3 style="margin-bottom:8px">Butuh Panduan Lebih Lengkap?</h3>
+                                    <p style="margin-bottom:16px; font-size:14px; color:var(--text-muted); line-height:1.6">Dapatkan <strong>Bundle Super Mama Kit</strong> — 4 panduan MPASI & GTM siap cetak, hanya <strong>Rp 25.000</strong>.</p>
+                                    <a href="#/download" class="btn btn-primary" style="background:#F9A825; color:white; border:none">Lihat Bundle →</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ad-slot ad-leaderboard">Bottom Article Ad Slot #6</div>
+                    </div>
+                    <aside>
+                        <div class="sidebar-sticky">
+                            <div class="ad-slot ad-rect">Sidebar Ad Slot #7</div>
+                            <div style="background:white; border:1px solid var(--border); border-radius:12px; padding:24px; margin-top:32px; text-align:center">
+                                <div style="font-size:40px; margin-bottom:12px">🛍️</div>
+                                <h3 style="font-size:18px; margin-bottom:8px">Super Mama Kit</h3>
+                                <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px">Bundle 4 Panduan & Template MPASI siap cetak.</p>
+                                <div style="font-weight:900; color:var(--primary); font-size:20px; margin-bottom:16px">Rp 25.000</div>
+                                <a href="#/download" class="btn btn-primary" style="width:100%">Lihat Detail</a>
+                            </div>
+                            <div class="ad-slot ad-rect" style="margin-top:32px">Sidebar Ad Slot #8</div>
+                        </div>
+                    </aside>
+                </div>
+            `;
+        }
+
+        function renderTools(id) {
+            if (!id) {
+                renderToolsHub();
+                return;
+            }
+            if (!sessionStorage.getItem('ad_watched_' + id)) {
+                const content = document.getElementById('app-content');
+                content.innerHTML = `<div class="container section-padding" style="text-align:center; padding:100px 20px"><h3>Memuat Alat Pantau...</h3></div>`;
+                showInterstitial(() => {
+                    sessionStorage.setItem('ad_watched_' + id, 'true');
+                    renderToolsView(id);
+                });
+                return;
+            }
+            renderToolsView(id);
+        }
+
+        function renderToolsView(id) {
+            if (id === 'kalkulator-gizi') {
+                renderKalkulatorGizi();
+            } else if (id === 'grafik-pertumbuhan') {
+                renderGrafikPertumbuhan();
+            } else if (id === 'milestone-tracker') {
+                renderMilestoneTracker();
+            } else if (id === 'usia-koreksi') {
+                renderUsiaKoreksi();
+            } else if (id === 'tekstur-mpasi') {
+                renderTeksturMpasi();
+            } else if (id === 'kalkulator-kalori') {
+                renderKalkulatorKalori();
+            } else if (id === 'bahan-penukar') {
+                renderBahanPenukar();
+            } else {
+                renderComingSoon();
+            }
+        }
+
+        function renderToolsHub() {
+            const tools = [
+                { id: 'kalkulator-gizi', icon: '📏', title: 'Kalkulator Status Gizi', desc: 'Cek status gizi anak (Z-score) berdasarkan standar WHO.', badge: 'P1 • Gratis' },
+                { id: 'grafik-pertumbuhan', icon: '📈', title: 'Grafik Pertumbuhan', desc: 'Plot BB & TB anak di kurva WHO secara interaktif.', badge: 'P1 • Gratis' },
+                { id: 'milestone-tracker', icon: '🧩', title: 'Milestone Tracker', desc: 'Pantau perkembangan motorik, bahasa, dan sosial anak.', badge: 'P2 • Gratis' },
+                { id: 'usia-koreksi', icon: '👶', title: 'Kalkulator Usia Koreksi', desc: 'Hitung usia koreksi untuk bayi prematur secara akurat.', badge: 'P2 • Gratis' },
+                { id: 'bahan-penukar', icon: '🥦', title: 'Daftar Bahan Penukar', desc: 'Cari tahu takaran makanan pengganti dengan nilai gizi yang setara.', badge: 'P3 • Gratis' },
+                { id: 'tekstur-mpasi', icon: '🥣', title: 'Panduan Tekstur MPASI', desc: 'Rekomendasi tekstur makanan sesuai usia anak.', badge: 'P3 • Gratis' },
+                { id: 'kalkulator-kalori', icon: '🍎', title: 'Kalkulator Kalori', desc: 'Hitung kebutuhan kalori harian berdasarkan aktivitas.', badge: 'P4 • Gratis' }
+            ];
+
+            const content = document.getElementById('app-content');
+            content.innerHTML = `
+                <div class="container section-padding">
+                    <div style="text-align:center; max-width:600px; margin:0 auto 48px">
+                        <h1>Alat Pantau Tumbuh Kembang</h1>
+                        <p style="color:var(--text-muted)">Gunakan tools interaktif kami untuk memantau tumbuh kembang si kecil sesuai standar WHO dan Kemenkes RI.</p>
+                    </div>
+
+                    <div class="ad-slot ad-leaderboard">Top Tools Ad Slot #9</div>
+
+                    <div class="grid-3">
+                        ${tools.map(t => `
+                            <a href="#/tools/${t.id}" class="card" style="text-align:center; padding:32px">
+                                <div class="badge" style="background:var(--primary-light); color:var(--primary); margin-bottom:16px">${t.badge}</div>
+                                <div style="font-size:48px; margin-bottom:16px">${t.icon}</div>
+                                <h3 style="margin-bottom:12px">${t.title}</h3>
+                                <p style="color:var(--text-muted); font-size:14px; margin-bottom:0">${t.desc}</p>
+                            </a>
+                        `).join('')}
+                    </div>
+
+                    <div class="ad-slot ad-leaderboard">Bottom Tools Ad Slot #10</div>
+                </div>
+            `;
+        }
+
+        function renderKalkulatorGizi() {
+            const content = document.getElementById('app-content');
+            content.innerHTML = `
+                <div class="container section-padding">
+                    <div style="margin-bottom:20px; font-size:14px">
+                        <a href="#/" style="color:var(--text-muted)">Beranda</a> / 
+                        <a href="#/tools" style="color:var(--text-muted)">Alat Pantau</a> / 
+                        <span style="color:var(--primary); font-weight:700">Kalkulator Status Gizi</span>
+                    </div>
+                    <div style="text-align:center; max-width:600px; margin:0 auto 40px">
+                        <h1>Kalkulator Status Gizi Anak</h1>
+                        <p style="color:var(--text-muted)">Cek apakah berat dan tinggi si kecil sudah sesuai standar WHO (Z-score).</p>
+                    </div>
+
+                    <div style="max-width:600px; margin:0 auto">
+                        <div class="tool-box">
+                            <form id="form-gizi" onsubmit="event.preventDefault(); calculateGizi();">
+                                <div class="form-group">
+                                    <label>Usia Anak (Bulan)</label>
+                                    <input type="number" id="gizi-usia" class="form-control" placeholder="Contoh: 12" required min="0" max="60">
+                                </div>
+                                <div class="form-group">
+                                    <label>Jenis Kelamin</label>
+                                    <select id="gizi-jk" class="form-control">
+                                        <option value="L">Laki-laki</option>
+                                        <option value="P">Perempuan</option>
+                                    </select>
+                                </div>
+                                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px">
+                                    <div class="form-group">
+                                        <label>Berat Badan (kg)</label>
+                                        <input type="number" id="gizi-bb" step="0.1" class="form-control" placeholder="Contoh: 9.5" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tinggi Badan (cm)</label>
+                                        <input type="number" id="gizi-tb" step="0.1" class="form-control" placeholder="Contoh: 75.2" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Lingkar Kepala (cm) - Opsional</label>
+                                    <input type="number" id="gizi-lk" step="0.1" class="form-control" placeholder="Contoh: 46.0">
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="width:100%">Hitung Z-Score</button>
+                            </form>
+
+                            <div id="result-gizi" style="display:none; margin-top:32px; padding-top:32px; border-top:1px solid var(--border)">
+                                <h3 style="margin-bottom:20px; text-align:center">Hasil Perhitungan</h3>
+                                <div style="display:flex; flex-direction:column; gap:16px">
+                                    <div style="background:#EAF6F1; padding:16px; border-radius:12px; display:flex; justify-content:space-between; align-items:center">
+                                        <div>
+                                            <div style="font-weight:700">Berat per Umur (BB/U)</div>
+                                            <div style="font-size:12px; color:var(--text-muted)">Z-score: <span id="z-bbu">-0.5</span></div>
+                                        </div>
+                                        <div id="status-bbu" class="badge" style="background:#3BAD8A; color:white; margin:0">Gizi Baik</div>
+                                    </div>
+                                    <div style="background:#FFF8E1; padding:16px; border-radius:12px; display:flex; justify-content:space-between; align-items:center">
+                                        <div>
+                                            <div style="font-weight:700">Tinggi per Umur (TB/U)</div>
+                                            <div style="font-size:12px; color:var(--text-muted)">Z-score: <span id="z-tbu">-2.1</span></div>
+                                        </div>
+                                        <div id="status-tbu" class="badge" style="background:#F9A825; color:white; margin:0">Pendek</div>
+                                    </div>
+                                    <div style="background:#EAF6F1; padding:16px; border-radius:12px; display:flex; justify-content:space-between; align-items:center">
+                                        <div>
+                                            <div style="font-weight:700">Berat per Tinggi (BB/TB)</div>
+                                            <div style="font-size:12px; color:var(--text-muted)">Z-score: <span id="z-bbtb">0.2</span></div>
+                                        </div>
+                                        <div id="status-bbtb" class="badge" style="background:#3BAD8A; color:white; margin:0">Gizi Baik</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function calculateGizi() {
+            // Mock calculation logic
+            document.getElementById('result-gizi').style.display = 'block';
+            document.getElementById('result-gizi').scrollIntoView({ behavior: "smooth" });
+        }
+
+        function renderGrafikPertumbuhan() {
+            const content = document.getElementById('app-content');
+            content.innerHTML = `
+                <div class="container section-padding">
+                    <div style="margin-bottom:20px; font-size:14px">
+                        <a href="#/" style="color:var(--text-muted)">Beranda</a> / 
+                        <a href="#/tools" style="color:var(--text-muted)">Alat Pantau</a> / 
+                        <span style="color:var(--primary); font-weight:700">Grafik Pertumbuhan</span>
+                    </div>
+                    <div style="text-align:center; max-width:600px; margin:0 auto 40px">
+                        <h1>Grafik Pertumbuhan WHO</h1>
+                        <p style="color:var(--text-muted)">Plot BB & TB si kecil untuk melihat tren pertumbuhannya secara visual dan evaluasi gizi terpadu.</p>
+                    </div>
+
+                    <div style="max-width:800px; margin:0 auto">
+                        <div class="tool-box" style="margin-bottom:24px">
+                            <form id="form-grafik" onsubmit="event.preventDefault(); updateChart();">
+                                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:20px">
+                                    <div class="form-group">
+                                        <label>Usia (Bulan)</label>
+                                        <input type="number" id="grafik-usia" class="form-control" required min="0" max="60" placeholder="Misal: 12">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Berat Badan (kg)</label>
+                                        <input type="number" id="grafik-bb" step="0.1" class="form-control" required placeholder="Misal: 9.5">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tinggi Badan (cm)</label>
+                                        <input type="number" id="grafik-tb" step="0.1" class="form-control" required placeholder="Misal: 75.0">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="color:transparent; display:block">Action</label>
+                                        <button type="submit" class="btn btn-primary" style="width:100%">Update Grafik</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tool-box">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px">
+                                <h3 id="grafik-title">Kurva Berat Badan per Umur (BB/U)</h3>
+                                <button class="btn btn-outline" style="padding:8px 16px; font-size:14px" onclick="window.toggleChartType()">Ganti Grafik TB/U</button>
+                            </div>
+                            <div style="position: relative; height:400px; width:100%">
+                                <canvas id="growthChart"></canvas>
+                            </div>
+                            <div id="grafik-analisis" style="display:none; margin-top:24px; padding:20px; background:var(--primary-light); border-radius:12px; text-align:left">
+                                <div style="font-weight:700; margin-bottom:16px; font-size:18px; color:var(--primary-dark)">Analisis Terpadu</div>
+                                <div style="display:flex; flex-direction:column; gap:12px">
+                                    <div style="background:#FFF; padding:12px; border-radius:8px; border-left:4px solid var(--primary)">
+                                        <strong style="display:block; margin-bottom:4px">1. Berat per Umur (BB/U)</strong>
+                                        <span id="analisis-bbu"></span>
+                                    </div>
+                                    <div style="background:#FFF; padding:12px; border-radius:8px; border-left:4px solid #F9A825">
+                                        <strong style="display:block; margin-bottom:4px">2. Tinggi per Umur (TB/U)</strong>
+                                        <span id="analisis-tbu"></span>
+                                    </div>
+                                    <div style="background:#FFF; padding:12px; border-radius:8px; border-left:4px solid #3BAD8A">
+                                        <strong style="display:block; margin-bottom:4px">3. Berat per Tinggi (BB/TB)</strong>
+                                        <span id="analisis-bbtb"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            setTimeout(() => {
+                if (typeof Chart !== 'undefined') {
+                    const ctx = document.getElementById('growthChart');
+                    if (ctx) {
+                        const labels60 = Array.from({ length: 61 }, (_, i) => i.toString());
+                        const generateData = (start, increment, decay) => {
+                            let data = [];
+                            let current = start;
+                            for (let i = 0; i <= 60; i++) {
+                                data.push(parseFloat(current.toFixed(1)));
+                                current += increment * Math.pow(decay, i);
+                            }
+                            return data;
+                        };
+                        const dataAnakBB = Array(61).fill(null);
+                        dataAnakBB[0] = 3.0; dataAnakBB[1] = 4.0; dataAnakBB[2] = 5.0;
+                        const dataAnakTB = Array(61).fill(null);
+                        dataAnakTB[0] = 49.0; dataAnakTB[1] = 54.0; dataAnakTB[2] = 58.0;
+
+                        window.chartDataSets = {
+                            bbu: {
+                                labelY: 'Berat Badan (kg)',
+                                title: 'Kurva Berat Badan per Umur (BB/U)',
+                                btnText: 'Ganti Grafik TB/U',
+                                data: [
+                                    { label: '+3 SD', data: generateData(5.0, 1.6, 0.92), borderColor: '#e57373', fill: false, tension: 0.4 },
+                                    { label: '+2 SD', data: generateData(4.4, 1.4, 0.92), borderColor: '#ffb74d', fill: false, tension: 0.4 },
+                                    { label: 'Median', data: generateData(3.3, 1.2, 0.92), borderColor: '#81c784', fill: false, tension: 0.4 },
+                                    { label: '-2 SD', data: generateData(2.5, 0.9, 0.92), borderColor: '#ffb74d', fill: false, tension: 0.4 },
+                                    { label: '-3 SD', data: generateData(2.1, 0.8, 0.92), borderColor: '#e57373', fill: false, tension: 0.4 },
+                                    { label: 'Anak Anda', data: dataAnakBB, borderColor: '#2C2C2A', backgroundColor: '#2C2C2A', fill: false, borderDash: [5, 5], pointRadius: 4, tension: 0.4 }
+                                ]
+                            },
+                            tbu: {
+                                labelY: 'Tinggi Badan (cm)',
+                                title: 'Kurva Tinggi Badan per Umur (TB/U)',
+                                btnText: 'Ganti Grafik BB/U',
+                                data: [
+                                    { label: '+3 SD', data: generateData(55.0, 2.6, 0.96), borderColor: '#e57373', fill: false, tension: 0.4 },
+                                    { label: '+2 SD', data: generateData(53.0, 2.5, 0.96), borderColor: '#ffb74d', fill: false, tension: 0.4 },
+                                    { label: 'Median', data: generateData(50.0, 2.4, 0.96), borderColor: '#81c784', fill: false, tension: 0.4 },
+                                    { label: '-2 SD', data: generateData(46.0, 2.3, 0.96), borderColor: '#ffb74d', fill: false, tension: 0.4 },
+                                    { label: '-3 SD', data: generateData(44.0, 2.2, 0.96), borderColor: '#e57373', fill: false, tension: 0.4 },
+                                    { label: 'Anak Anda', data: dataAnakTB, borderColor: '#2C2C2A', backgroundColor: '#2C2C2A', fill: false, borderDash: [5, 5], pointRadius: 4, tension: 0.4 }
+                                ]
+                            }
+                        };
+
+                        window.currentChartMode = 'bbu';
+
+                        window.myGrowthChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: labels60,
+                                datasets: window.chartDataSets.bbu.data
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    title: { display: false }
+                                },
+                                scales: {
+                                    x: { title: { display: true, text: 'Usia (Bulan)' } },
+                                    y: { title: { display: true, text: 'Berat Badan (kg)' } }
+                                }
+                            }
+                        });
+                    }
+                }
+            }, 100);
+        }
+
+        window.toggleChartType = function () {
+            if (!window.myGrowthChart) return;
+            const btn = event.target;
+            const newMode = window.currentChartMode === 'bbu' ? 'tbu' : 'bbu';
+            window.currentChartMode = newMode;
+
+            const config = window.chartDataSets[newMode];
+            window.myGrowthChart.data.datasets = config.data;
+            window.myGrowthChart.options.scales.y.title.text = config.labelY;
+            document.getElementById('grafik-title').innerText = config.title;
+            btn.innerText = config.btnText;
+
+            window.myGrowthChart.update();
+        };
+
+        window.updateChart = function () {
+            const usia = parseInt(document.getElementById('grafik-usia').value);
+            const bb = parseFloat(document.getElementById('grafik-bb').value);
+            const tb = parseFloat(document.getElementById('grafik-tb').value);
+
+            if (usia >= 0 && usia <= 60 && window.myGrowthChart) {
+                // Update datasets for both charts
+                window.chartDataSets.bbu.data[5].data[usia] = bb;
+                window.chartDataSets.tbu.data[5].data[usia] = tb;
+                window.myGrowthChart.update();
+
+                // Analisis BB/U
+                const medianBB = window.chartDataSets.bbu.data[2].data[usia];
+                const min2SDBB = window.chartDataSets.bbu.data[3].data[usia];
+                const plus2SDBB = window.chartDataSets.bbu.data[1].data[usia];
+                let textBBU = "";
+                if (bb > plus2SDBB) textBBU = "Risiko berat badan lebih. Konsultasikan pola makan.";
+                else if (bb >= medianBB) textBBU = "Pertumbuhan sangat baik (di atas Median).";
+                else if (bb >= min2SDBB) textBBU = "Berat normal, namun di bawah Median. Perhatikan asupan.";
+                else textBBU = "Risiko berat badan kurang (Gizi Kurang). Segera konsultasi.";
+
+                // Analisis TB/U
+                const medianTB = window.chartDataSets.tbu.data[2].data[usia];
+                const min2SDTB = window.chartDataSets.tbu.data[3].data[usia];
+                let textTBU = "";
+                if (tb >= medianTB) textTBU = "Tinggi badan sangat baik.";
+                else if (tb >= min2SDTB) textTBU = "Tinggi normal, terus pantau stimulasi dan nutrisi tulang.";
+                else textTBU = "Perhatian: Indikasi perawakan pendek (Stunting). Perlu rujukan dokter anak.";
+
+                // Analisis BB/TB (Mock sederhana)
+                // Rasio BB/TB ideal bayi/balita bervariasi, kita buat perkiraan logis dari median TB/BB
+                // Ideal BB = interpolasi kasar dari TB yang dimasukkan
+                const mockIdealBB = (tb / 50) * 3.3; // Very rough MVP approximation
+                let textBBTB = "";
+                if (bb > mockIdealBB * 1.2) textBBTB = "Gizi Lebih (Obesitas). Rasio berat dan tinggi melebihi batas aman.";
+                else if (bb >= mockIdealBB * 0.8) textBBTB = "Gizi Baik (Normal). Proporsi berat badan terhadap tinggi sudah proporsional.";
+                else textBBTB = "Gizi Kurang (Kurus). Proporsi berat badan lebih kecil dari tinggi badan.";
+
+                document.getElementById('analisis-bbu').innerText = textBBU;
+                document.getElementById('analisis-tbu').innerText = textTBU;
+                document.getElementById('analisis-bbtb').innerText = textBBTB;
+
+                document.getElementById('grafik-analisis').style.display = 'block';
+            } else {
+                alert("Usia harus antara 0 hingga 60 bulan untuk grafik ini.");
+            }
+        };
+
+        function renderMilestoneTracker() {
+            const content = document.getElementById('app-content');
+            content.innerHTML = `
+                <div class="container section-padding">
+                    <div style="margin-bottom:20px; font-size:14px">
+                        <a href="#/" style="color:var(--text-muted)">Beranda</a> / 
+                        <a href="#/tools" style="color:var(--text-muted)">Alat Pantau</a> / 
+                        <span style="color:var(--primary); font-weight:700">Milestone Tracker</span>
+                    </div>
+                    <div style="text-align:center; max-width:600px; margin:0 auto 40px">
+                        <h1>Milestone Tracker</h1>
+                        <p style="color:var(--text-muted)">Pilih usia anak dan centang milestone yang sudah berhasil dicapai sesuai anjuran tumbuh kembang.</p>
+                    </div>
+
+                    <div style="max-width:600px; margin:0 auto">
+                        <div class="tool-box">
+                            <div class="form-group">
+                                <label>Pilih Rentang Usia</label>
+                                <select id="milestone-age" class="form-control" onchange="updateMilestone()">
+                                    <option value="6-9">6 - 9 Bulan</option>
+                                    <option value="9-12">9 - 12 Bulan</option>
+                                    <option value="12-18">12 - 18 Bulan</option>
+                                </select>
+                            </div>
+                            
+                            <div id="milestone-list" style="margin-top:32px">
+                                <!-- Rendered dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            setTimeout(updateMilestone, 50);
+        }
+
+        window.updateMilestone = function () {
+            const milestones = {
+                '6-9': [
+                    { domain: 'Motorik Kasar', items: ['Duduk mandiri tanpa sandaran', 'Berguling ke dua arah (tengkurap ke telentang dan sebaliknya)', 'Mulai berusaha merangkak atau bergeser'] },
+                    { domain: 'Motorik Halus', items: ['Memindahkan benda dari satu tangan ke tangan lain', 'Memasukkan benda ke dalam mulut (fase oral)', 'Meraih mainan yang berjarak agak jauh'] },
+                    { domain: 'Bahasa & Komunikasi', items: ['Menengok segera jika dipanggil namanya', 'Mengoceh dengan suku kata berulang (ma-ma-ma, da-da-da)', 'Tertawa keras saat diajak bermain'] },
+                    { domain: 'Sosial & Emosional', items: ['Menunjukkan kecemasan pada orang asing (stranger anxiety)'] }
+                ],
+                '9-12': [
+                    { domain: 'Motorik Kasar', items: ['Merangkak dengan perut terangkat (merangkak komando)', 'Menarik tubuh untuk berdiri sambil berpegangan pada perabotan', 'Berjalan merambat (cruising) menyusuri sofa', 'Mampu berdiri mandiri selama beberapa detik tanpa pegangan'] },
+                    { domain: 'Motorik Halus', items: ['Mengambil benda kecil (kismis/kacang) menggunakan ibu jari dan telunjuk (pincer grasp)', 'Menunjuk benda atau gambar menggunakan jari telunjuk', 'Suka menjatuhkan benda ke lantai berulang-ulang'] },
+                    { domain: 'Bahasa & Komunikasi', items: ['Mengucapkan 1-2 kata spesifik yang bermakna (misal "Mama" atau "Papa")', 'Mengerti instruksi sederhana disertai gestur (contoh: "Sini", "Jangan")'] },
+                    { domain: 'Sosial & Emosional', items: ['Melambaikan tangan untuk "Da-da" atau mencium jauh (kiss bye)'] }
+                ],
+                '12-18': [
+                    { domain: 'Motorik Kasar', items: ['Berjalan mandiri walau masih sedikit goyah', 'Mampu membungkuk untuk memungut mainan di lantai lalu berdiri lagi', 'Mencoba menaiki tangga dengan merangkak atau dipegangi', 'Mampu berjalan mundur 1-2 langkah'] },
+                    { domain: 'Motorik Halus', items: ['Menyusun 2-3 balok kayu menjadi menara', 'Belajar makan sendiri menggunakan sendok meski masih berantakan', 'Mencoret-coret dengan krayon atau pensil di atas kertas'] },
+                    { domain: 'Bahasa & Komunikasi', items: ['Memiliki kosakata 5-10 kata bermakna (bola, susu, anjing)', 'Menunjuk minimal 1 bagian tubuh saat ditanya (contoh: "Mana hidung?")'] },
+                    { domain: 'Sosial & Emosional', items: ['Merespons saat diminta bantuan sederhana ("Tolong ambilkan bola")'] }
+                ]
+            };
+
+            const age = document.getElementById('milestone-age').value;
+            const data = milestones[age] || [];
+
+            let html = '';
+            data.forEach(group => {
+                html += `
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; margin-top:24px">
+                        <h3 style="margin:0; font-size:18px">${group.domain}</h3>
+                        <span class="badge" style="background:#EAF6F1; color:var(--primary); margin:0">0/${group.items.length} Selesai</span>
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:12px">
+                `;
+                group.items.forEach(item => {
+                    html += `
+                        <label style="display:flex; align-items:center; gap:12px; padding:16px; border:1px solid var(--border); border-radius:8px; cursor:pointer; background:var(--bg-card)">
+                            <input type="checkbox" style="width:20px; height:20px; cursor:pointer" onchange="this.parentElement.style.borderColor = this.checked ? 'var(--primary)' : 'var(--border)'">
+                            <span style="font-size:14px">${item}</span>
+                        </label>
+                    `;
+                });
+                html += '</div>';
+            });
+
+            document.getElementById('milestone-list').innerHTML = html;
+        };
+
+        function renderUsiaKoreksi() {
+            const content = document.getElementById('app-content');
+            content.innerHTML = `
+                <div class="container section-padding">
+                    <div style="margin-bottom:20px; font-size:14px">
+                        <a href="#/" style="color:var(--text-muted)">Beranda</a> / 
+                        <a href="#/tools" style="color:var(--text-muted)">Alat Pantau</a> / 
+                        <span style="color:var(--primary); font-weight:700">Usia Koreksi Prematur</span>
+                    </div>
+                    <div style="text-align:center; max-width:600px; margin:0 auto 40px">
+                        <h1>Kalkulator Usia Koreksi</h1>
+                        <p style="color:var(--text-muted)">Hitung usia koreksi bayi prematur sebagai patokan milestone & pertumbuhan yang akurat.</p>
+                    </div>
+
+                    <div style="max-width:600px; margin:0 auto">
+                        <div class="tool-box">
+                            <form onsubmit="event.preventDefault(); document.getElementById('result-koreksi').style.display='block';">
+                                <div class="form-group">
+                                    <label>Tanggal Lahir Anak</label>
+                                    <input type="date" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Usia Kehamilan Saat Lahir (Minggu)</label>
+                                    <input type="number" class="form-control" placeholder="Contoh: 32" required min="20" max="36">
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="width:100%">Hitung Usia Koreksi</button>
+                            </form>
+
+                            <div id="result-koreksi" style="display:none; margin-top:32px; padding-top:32px; border-top:1px solid var(--border)">
+                                <h3 style="margin-bottom:12px; text-align:center">Hasil</h3>
+                                <div style="background:#EAF6F1; padding:20px; border-radius:12px; text-align:center">
+                                    <div style="font-size:14px; color:var(--text-muted); margin-bottom:8px">Usia Koreksi Anak Saat Ini:</div>
+                                    <div style="font-size:32px; font-weight:800; color:var(--primary); margin-bottom:12px">8 Bulan 2 Hari</div>
+                                    <p style="font-size:14px; margin:0; color:#333">Gunakan usia <strong>8 Bulan</strong> sebagai patokan saat melihat kurva pertumbuhan atau mengecek milestone si kecil, bukan usia kronologis (dari tanggal lahir).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderComingSoon() {
+            const content = document.getElementById('app-content');
+            content.innerHTML = `
+                <div class="container section-padding" style="text-align:center">
+                    <div style="margin-bottom:20px; font-size:14px; text-align:left">
+                        <a href="#/" style="color:var(--text-muted)">Beranda</a> / 
+                        <a href="#/tools" style="color:var(--text-muted)">Alat Pantau</a>
+                    </div>
+                    <div style="font-size:80px; margin-bottom:24px">🚧</div>
+                    <h1>Fitur Segera Hadir</h1>
+                    <p style="color:var(--text-muted); max-width:500px; margin:0 auto 32px">Kami sedang mengembangkan fitur ini agar bisa membantu Mama memantau tumbuh kembang si kecil dengan lebih baik.</p>
+                    <a href="#/tools" class="btn btn-primary">Kembali ke Daftar Alat Pantau</a>
+                </div>
+            `;
+        }
+
+        function renderBahanPenukar() {
+            const content = document.getElementById('app-content');
+            content.innerHTML = `
+                <div class="container section-padding">
+                    <div style="margin-bottom:20px; font-size:14px">
+                        <a href="#/" style="color:var(--text-muted)">Beranda</a> / 
+                        <a href="#/tools" style="color:var(--text-muted)">Alat Pantau</a> / 
+                        <span style="color:var(--primary); font-weight:700">Daftar Bahan Penukar</span>
+                    </div>
+                    <div style="text-align:center; max-width:600px; margin:0 auto 40px">
+                        <h1>Daftar Bahan Makanan Penukar</h1>
+                        <p style="color:var(--text-muted)">Cari tahu padanan porsi makanan berdasarkan nilai kalori dan gizi yang setara untuk menyusun menu MPASI si kecil.</p>
+                    </div>
+
+                    <div style="max-width:800px; margin:0 auto">
+                        <div class="tool-box">
+                            <div class="form-group">
+                                <label>Pilih Golongan Bahan Makanan</label>
+                                <select id="penukar-golongan" class="form-control" onchange="window.updateBahanPenukar()">
+                                    <option value="1">Golongan 1: Karbohidrat</option>
+                                    <option value="2">Golongan 2: Protein Hewani</option>
+                                    <option value="3">Golongan 3: Protein Nabati</option>
+                                    <option value="4">Golongan 4: Sayuran</option>
+                                    <option value="5">Golongan 5: Buah dan Gula</option>
+                                    <option value="6">Golongan 6: Susu</option>
+                                    <option value="7">Golongan 7: Minyak dan Lemak</option>
+                                    <option value="8">Golongan 8: Makanan Tanpa Kalori</option>
+                                </select>
+                            </div>
+
+                            <div id="penukar-info" style="margin-top:24px; padding:16px; background:var(--primary-light); border-radius:8px; display:none; color:var(--primary-dark)">
+                                <!-- Info kalori per satuan penukar -->
+                            </div>
+                            
+                            <div style="margin-top:24px; overflow-x:auto;">
+                                <table style="width:100%; border-collapse:collapse; text-align:left;">
+                                    <thead>
+                                        <tr style="border-bottom:2px solid var(--border)">
+                                            <th style="padding:12px">Bahan Makanan</th>
+                                            <th style="padding:12px">Berat (g)</th>
+                                            <th style="padding:12px">URT (Ukuran Rumah Tangga)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="penukar-table">
+                                        <!-- Rendered dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            setTimeout(window.updateBahanPenukar, 50);
+        }
+
+        window.updateBahanPenukar = function () {
+            const dataPenukar = {
+                "1": {
+                    title: "1 Satuan Penukar = 175 Kalori, 4 g Protein, 40 g Karbohidrat",
+                    items: [
+                        { nama: "Beras", berat: "50", urt: "1/2 gelas" },
+                        { nama: "Bihun", berat: "50", urt: "1/2 gelas" },
+                        { nama: "Biskuit", berat: "40", urt: "4 buah besar" },
+                        { nama: "Bubur beras", berat: "400", urt: "2 gelas" },
+                        { nama: "Crackers", berat: "50", urt: "5 buah sedang" },
+                        { nama: "Jagung segar", berat: "120", urt: "1/2 gelas" },
+                        { nama: "Kentang", berat: "210", urt: "2 buah sedang" },
+                        { nama: "Makaroni", berat: "50", urt: "1/2 gelas" },
+                        { nama: "Mi basah", berat: "200", urt: "2 gelas" },
+                        { nama: "Nasi", berat: "100", urt: "3/4 gelas" },
+                        { nama: "Roti putih", berat: "70", urt: "3 iris" },
+                        { nama: "Singkong", berat: "120", urt: "1,5 potong" },
+                        { nama: "Ubi", berat: "135", urt: "1 buah sedang" }
+                    ]
+                },
+                "2": {
+                    title: "Protein Hewani Rendah Lemak (50 Kal, 7g Prot) | Sedang (75 Kal, 7g Prot) | Tinggi (150 Kal, 7g Prot)",
+                    items: [
+                        { nama: "Ayam tanpa kulit", berat: "40", urt: "1 potong sedang" },
+                        { nama: "Ikan segar", berat: "40", urt: "1/3 ekor sedang" },
+                        { nama: "Udang segar", berat: "35", urt: "5 ekor sedang" },
+                        { nama: "Putih telur ayam", berat: "65", urt: "1,5 butir" },
+                        { nama: "Bakso", berat: "170", urt: "10 buah sedang" },
+                        { nama: "Daging sapi", berat: "35", urt: "1 potong sedang" },
+                        { nama: "Hati ayam", berat: "30", urt: "1 potong sedang" },
+                        { nama: "Telur ayam", berat: "55", urt: "1 butir" },
+                        { nama: "Ayam dengan kulit", berat: "35", urt: "1 potong sedang" },
+                        { nama: "Sosis", berat: "50", urt: "1 potong kecil" }
+                    ]
+                },
+                "3": {
+                    title: "1 Satuan Penukar = 75 Kalori, 5 g Protein, 3 g Lemak, 7 g Karbohidrat",
+                    items: [
+                        { nama: "Kacang hijau", berat: "20", urt: "2 sendok makan" },
+                        { nama: "Kacang kedelai", berat: "25", urt: "2,5 sendok makan" },
+                        { nama: "Kacang merah", berat: "20", urt: "2 sendok makan" },
+                        { nama: "Tahu", berat: "110", urt: "1 buah besar" },
+                        { nama: "Tempe kedelai", berat: "50", urt: "2 potong sedang" }
+                    ]
+                },
+                "4": {
+                    title: "Sayuran: A (Bebas) | B (1 Porsi/100g = 25 Kalori) | C (1 Porsi/100g = 25 Kal, 10g Kh)",
+                    items: [
+                        { nama: "Ketimun, Tomat, Selada (Gol A)", berat: "Bebas", urt: "Bebas dikonsumsi" },
+                        { nama: "Bayam, Buncis, Brokoli, Wortel (Gol B)", berat: "100", urt: "1 mangkuk segar" },
+                        { nama: "Kacang panjang, Labu siam (Gol B)", berat: "100", urt: "1 mangkuk segar" },
+                        { nama: "Daun singkong, Melinjo (Gol C)", berat: "100", urt: "1 mangkuk segar" }
+                    ]
+                },
+                "5": {
+                    title: "1 Satuan Penukar = 25 Kalori, 1 g Protein, 5 g Karbohidrat",
+                    items: [
+                        { nama: "Apel merah", berat: "85", urt: "1 buah kecil" },
+                        { nama: "Jeruk manis", berat: "110", urt: "2 buah sedang" },
+                        { nama: "Mangga", berat: "90", urt: "3/4 buah besar" },
+                        { nama: "Pisang ambon", berat: "50", urt: "1 buah" },
+                        { nama: "Pepaya", berat: "110", urt: "1 potong besar" },
+                        { nama: "Semangka", berat: "180", urt: "2 potong sedang" }
+                    ]
+                },
+                "6": {
+                    title: "Susu Tanpa Lemak (75 Kal) | Rendah Lemak (125 Kal) | Tinggi Lemak (150 Kal)",
+                    items: [
+                        { nama: "Susu skim cair", berat: "200", urt: "1 gelas" },
+                        { nama: "Susu sapi", berat: "200", urt: "1 gelas" },
+                        { nama: "Keju", berat: "35", urt: "1 potong kecil" },
+                        { nama: "Tepung susu penuh", berat: "30", urt: "6 sendok makan" }
+                    ]
+                },
+                "7": {
+                    title: "1 Satuan Penukar = 50 Kalori, 9 g Lemak",
+                    items: [
+                        { nama: "Alpukat", berat: "60", urt: "1/2 buah besar" },
+                        { nama: "Minyak zaitun / sawit", berat: "5", urt: "1 sendok teh" },
+                        { nama: "Mentega / Margarin", berat: "5", urt: "1 sendok teh" },
+                        { nama: "Santan", berat: "40", urt: "1/3 gelas" }
+                    ]
+                },
+                "8": {
+                    title: "Makanan Tanpa Kalori",
+                    items: [
+                        { nama: "Agar-agar", berat: "-", urt: "Bebas" },
+                        { nama: "Air kaldu", berat: "-", urt: "Bebas" },
+                        { nama: "Air mineral", berat: "-", urt: "Bebas" }
+                    ]
+                }
+            };
+
+            const golId = document.getElementById('penukar-golongan').value;
+            const data = dataPenukar[golId];
+
+            if (data) {
+                const infoEl = document.getElementById('penukar-info');
+                infoEl.innerHTML = `<strong>Kandungan Gizi:</strong> ${data.title}`;
+                infoEl.style.display = 'block';
+
+                let html = '';
+                data.items.forEach(item => {
+                    html += `
+                        <tr style="border-bottom:1px solid var(--border)">
+                            <td style="padding:12px; color:var(--primary-dark)"><strong>${item.nama}</strong></td>
+                            <td style="padding:12px">${item.berat}</td>
+                            <td style="padding:12px">${item.urt}</td>
+                        </tr>
+                    `;
+                });
+                document.getElementById('penukar-table').innerHTML = html;
+            }
+        };
+
+        function renderTeksturMpasi() {
+            const content = document.getElementById('app-content');
+            content.innerHTML = `
+                <div class="container section-padding">
+                    <div style="margin-bottom:20px; font-size:14px">
+                        <a href="#/" style="color:var(--text-muted)">Beranda</a> / 
+                        <a href="#/tools" style="color:var(--text-muted)">Alat Pantau</a> / 
+                        <span style="color:var(--primary); font-weight:700">Panduan Tekstur MPASI</span>
+                    </div>
+                    <div style="text-align:center; max-width:600px; margin:0 auto 40px">
+                        <h1>Panduan Tekstur MPASI</h1>
+                        <p style="color:var(--text-muted)">Ketahui tekstur MPASI yang tepat sesuai usia si kecil untuk mencegah tersedak dan melatih otot mengunyah.</p>
+                    </div>
+
+                    <div style="max-width:600px; margin:0 auto">
+                        <div class="tool-box">
+                            <form onsubmit="event.preventDefault(); window.showTekstur();">
+                                <div class="form-group">
+                                    <label>Usia Anak (Bulan)</label>
+                                    <input type="number" id="mpasi-usia" class="form-control" required min="0" max="36" placeholder="Misal: 6">
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="width:100%">Cek Panduan Tekstur</button>
+                            </form>
+
+                            <div id="result-mpasi" style="display:none; margin-top:32px; padding-top:32px; border-top:1px solid var(--border)">
+                                <h3 style="margin-bottom:16px; text-align:center">Rekomendasi Tekstur</h3>
+                                <div style="background:#FFF8E1; padding:32px 24px; border-radius:12px; text-align:center">
+                                    <div style="font-size:60px; margin-bottom:16px" id="mpasi-icon">🥣</div>
+                                    <h2 style="color:var(--primary-dark); margin-bottom:12px; font-size:24px" id="mpasi-tekstur">Saring Halus (Puree)</h2>
+                                    <p style="color:#333; font-size:14px; margin-bottom:0; line-height:1.6" id="mpasi-desc">
+                                        Makanan dihaluskan hingga menjadi bubur saring.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        window.showTekstur = function () {
+            const usia = parseInt(document.getElementById('mpasi-usia').value);
+            let tekstur = "";
+            let desc = "";
+            let icon = "🥣";
+
+            if (usia < 6) {
+                tekstur = "Hanya ASI / Sufor";
+                icon = "🍼";
+                desc = "Untuk bayi di bawah 6 bulan, asupan utamanya hanyalah ASI eksklusif atau susu formula. Belum disarankan memberikan MPASI kecuali atas rekomendasi ketat dari dokter spesialis anak.";
+            } else if (usia === 6) {
+                tekstur = "Lumat (Puree / Mashed)";
+                desc = "Makanan dilumatkan hingga menjadi bubur saring atau ditumbuk halus. Tekstur kental, saat sendok dimiringkan makanan tidak tumpah perlahan, bukan encer seperti air.";
+            } else if (usia >= 7 && usia <= 8) {
+                tekstur = "Lumat (Mashed) / Cincang Halus";
+                icon = "🍲";
+                desc = "Makanan disaring namun tekstur mulai ditingkatkan kekasarannya. Bisa mulai dicincang halus atau dilumat tidak perlu sampai benar-benar halus saring. Biarkan ada sedikit tekstur untuk melatih lidah anak.";
+            } else if (usia >= 9 && usia <= 11) {
+                tekstur = "Cincang Kasar (Minced) / Finger Food";
+                icon = "🍘";
+                desc = "Makanan dicincang kasar, atau dipotong kecil-kecil memanjang sebesar jari yang bisa dipegang sendiri oleh anak (finger food). Di masa ini anak belajar menggigit dan mengunyah lebih aktif.";
+            } else {
+                tekstur = "Makanan Keluarga (Family Food)";
+                icon = "🍛";
+                desc = "Sama dengan makanan keluarga pada umumnya (nasi utuh, lauk pauk). Jika ada makanan yang terlalu keras atau besar (seperti daging liat), dipotong menjadi ukuran kecil yang mudah dikunyah anak.";
+            }
+
+            document.getElementById('mpasi-tekstur').innerText = tekstur;
+            document.getElementById('mpasi-desc').innerText = desc;
+            document.getElementById('mpasi-icon').innerText = icon;
+            document.getElementById('result-mpasi').style.display = 'block';
+        };
+
+        function renderKalkulatorKalori() {
+            const content = document.getElementById('app-content');
+            content.innerHTML = `
+                <div class="container section-padding">
+                    <div style="margin-bottom:20px; font-size:14px">
+                        <a href="#/" style="color:var(--text-muted)">Beranda</a> / 
+                        <a href="#/tools" style="color:var(--text-muted)">Alat Pantau</a> / 
+                        <span style="color:var(--primary); font-weight:700">Kalkulator Kalori</span>
+                    </div>
+                    <div style="text-align:center; max-width:600px; margin:0 auto 40px">
+                        <h1>Kalkulator Kebutuhan Kalori</h1>
+                        <p style="color:var(--text-muted)">Estimasi kasar kebutuhan kalori anak Anda dalam sehari menggunakan pendekatan berat badan.</p>
+                    </div>
+
+                    <div style="max-width:600px; margin:0 auto">
+                        <div class="tool-box">
+                            <form onsubmit="event.preventDefault(); window.showKalori();">
+                                <div class="form-group">
+                                    <label>Berat Badan Anak (kg)</label>
+                                    <input type="number" id="kalori-bb" step="0.1" class="form-control" required min="3" max="50" placeholder="Misal: 9.5">
+                                </div>
+                                <div class="form-group">
+                                    <label>Usia (Bulan)</label>
+                                    <input type="number" id="kalori-usia" class="form-control" required min="0" max="144" placeholder="Misal: 12">
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="width:100%">Hitung Kebutuhan</button>
+                            </form>
+
+                            <div id="result-kalori" style="display:none; margin-top:32px; padding-top:32px; border-top:1px solid var(--border)">
+                                <h3 style="margin-bottom:16px; text-align:center">Estimasi Kebutuhan Harian</h3>
+                                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px">
+                                    <div style="background:#EAF6F1; padding:24px; border-radius:12px; text-align:center">
+                                        <div style="font-size:14px; color:var(--text-muted); margin-bottom:8px">Energi (Kalori)</div>
+                                        <div style="font-size:32px; font-weight:800; color:var(--primary)" id="kalori-total">950 kkal</div>
+                                    </div>
+                                    <div style="background:#FFF8E1; padding:24px; border-radius:12px; text-align:center">
+                                        <div style="font-size:14px; color:var(--text-muted); margin-bottom:8px">Protein Minimal</div>
+                                        <div style="font-size:32px; font-weight:800; color:#F9A825" id="kalori-protein">15 g</div>
+                                    </div>
+                                </div>
+                                <p style="margin-top:20px; font-size:12px; color:var(--text-muted); text-align:center; line-height:1.5">
+                                    *Catatan: Ini adalah estimasi menggunakan formula Holiday-Segar sebagai referensi kasar. Kebutuhan aktual anak sangat bergantung pada tingkat aktivitas fisik dan kondisi medisnya.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        window.showKalori = function () {
+            const bb = parseFloat(document.getElementById('kalori-bb').value);
+            const usia = parseInt(document.getElementById('kalori-usia').value);
+
+            // Rough estimation formula (Holiday-Segar method for children)
+            let calories = 0;
+            if (bb <= 10) {
+                calories = bb * 100;
+            } else if (bb <= 20) {
+                calories = 1000 + ((bb - 10) * 50);
+            } else {
+                calories = 1500 + ((bb - 20) * 20);
+            }
+
+            // Rough protein estimation (approx 1.2g/kg to 1.5g/kg depending on age)
+            let protein = Math.round(bb * 1.5);
+            if (usia > 12) {
+                protein = Math.round(bb * 1.2);
+            }
+
+            document.getElementById('kalori-total').innerText = Math.round(calories) + ' kkal';
+            document.getElementById('kalori-protein').innerText = protein + ' g';
+            document.getElementById('result-kalori').style.display = 'block';
+        };
+
+        function renderDownload() {
+            const content = document.getElementById('app-content');
+            content.innerHTML = `
+            <style>
+            /* ===== SALES PAGE STYLES ===== */
+            .sp-body { background: #FAFAF8; }
+
+            /* HERO */
+            .sp-hero {
+                background: linear-gradient(160deg, #0F2A1E 0%, #1A3D2B 50%, #0F2A1E 100%);
+                padding: 72px 0 80px;
+                position: relative;
+                overflow: hidden;
+            }
+            .sp-hero::before {
+                content: '';
+                position: absolute; inset: 0;
+                background:
+                    radial-gradient(ellipse at 20% 50%, rgba(59,173,138,0.25) 0%, transparent 50%),
+                    radial-gradient(ellipse at 80% 20%, rgba(249,168,37,0.12) 0%, transparent 40%);
+                pointer-events: none;
+            }
+            .sp-hero-grid {
+                max-width: 1100px; margin: 0 auto; padding: 0 24px;
+                display: grid; grid-template-columns: 1fr 480px;
+                gap: 60px; align-items: center;
+            }
+            @media (max-width: 900px) {
+                .sp-hero-grid { grid-template-columns: 1fr; }
+                .sp-hero-visual { display: none; }
+            }
+            .sp-eyebrow {
+                display: inline-flex; align-items: center; gap: 8px;
+                background: rgba(249,168,37,0.15);
+                border: 1px solid rgba(249,168,37,0.3);
+                color: #F9A825; padding: 6px 16px; border-radius: 20px;
+                font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+                text-transform: uppercase; margin-bottom: 24px;
+                font-family: var(--font-display);
+            }
+            .sp-eyebrow span { animation: pulse-dot 1.5s ease-in-out infinite; }
+            @keyframes pulse-dot {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.3; }
+            }
+            .sp-hero h1 {
+                font-size: clamp(30px, 4vw, 48px); line-height: 1.1;
+                color: white; font-family: var(--font-display);
+                letter-spacing: -0.03em; margin-bottom: 20px;
+            }
+            .sp-hero h1 em { color: #4ECCA3; font-style: normal; }
+            .sp-hero-sub {
+                font-size: 17px; color: rgba(255,255,255,0.65);
+                line-height: 1.7; margin-bottom: 32px; max-width: 480px;
+            }
+            .sp-social-proof {
+                display: flex; align-items: center; gap: 12px;
+                color: rgba(255,255,255,0.55); font-size: 13px;
+                font-family: var(--font-display);
+            }
+            .sp-avatars { display: flex; }
+            .sp-avatar {
+                width: 32px; height: 32px; border-radius: 50%;
+                border: 2px solid rgba(255,255,255,0.3);
+                background: var(--primary);
+                display: flex; align-items: center; justify-content: center;
+                font-size: 14px; margin-left: -8px;
+            }
+            .sp-avatar:first-child { margin-left: 0; }
+            .sp-stars { color: #F9A825; font-size: 13px; }
+
+            /* FLOATING PRICE CARD */
+            .sp-price-card {
+                background: white;
+                border-radius: 24px;
+                padding: 36px 32px;
+                box-shadow: 0 32px 80px rgba(0,0,0,0.35);
+                position: relative;
+            }
+            .sp-price-card::before {
+                content: '';
+                position: absolute; top: 0; left: 0; right: 0; height: 4px;
+                background: linear-gradient(90deg, #3BAD8A, #F9A825);
+                border-radius: 24px 24px 0 0;
+            }
+            .sp-bestseller {
+                position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+                background: linear-gradient(90deg, #F9A825, #F97316);
+                color: white; padding: 5px 18px; border-radius: 20px;
+                font-size: 11px; font-weight: 800; letter-spacing: 0.08em;
+                text-transform: uppercase; font-family: var(--font-display);
+                white-space: nowrap; box-shadow: 0 4px 12px rgba(249,168,37,0.4);
+            }
+            .sp-card-title {
+                text-align: center; font-size: 20px; font-weight: 800;
+                font-family: var(--font-display); margin-bottom: 20px; color: var(--text-main);
+            }
+            .sp-card-items { margin-bottom: 20px; }
+            .sp-card-item {
+                display: flex; align-items: center; gap: 12px;
+                padding: 10px 0; border-bottom: 1px solid var(--border);
+            }
+            .sp-card-item:last-child { border-bottom: none; }
+            .sp-item-icon {
+                width: 36px; height: 36px; border-radius: 10px;
+                display: flex; align-items: center; justify-content: center;
+                font-size: 18px; flex-shrink: 0;
+            }
+            .sp-item-name { font-size: 13px; font-weight: 700; font-family: var(--font-display); }
+            .sp-item-price {
+                margin-left: auto; text-decoration: line-through;
+                color: #bbb; font-size: 12px; font-family: var(--font-display);
+            }
+            .sp-price-row {
+                background: var(--primary-light); border-radius: 14px;
+                padding: 18px 20px; margin-bottom: 18px; text-align: center;
+            }
+            .sp-old-price {
+                color: #aaa; text-decoration: line-through; font-size: 14px;
+                font-family: var(--font-display); margin-bottom: 2px;
+            }
+            .sp-discount-badge {
+                display: inline-block;
+                background: #FEE2E2; color: #C53030;
+                font-size: 11px; font-weight: 800; padding: 2px 10px;
+                border-radius: 20px; margin-left: 8px;
+                font-family: var(--font-display);
+            }
+            .sp-new-price {
+                font-size: 42px; font-weight: 900; color: var(--primary);
+                font-family: var(--font-display); line-height: 1.1;
+            }
+            .sp-price-note { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+            .sp-cta-btn {
+                display: block; width: 100%;
+                background: linear-gradient(135deg, #3BAD8A 0%, #2A8A6C 100%);
+                color: white; padding: 16px;
+                border-radius: 14px; font-size: 17px; font-weight: 800;
+                font-family: var(--font-display); text-align: center;
+                border: none; cursor: pointer;
+                box-shadow: 0 8px 24px rgba(59,173,138,0.35);
+                transition: all 0.25s; text-decoration: none;
+                margin-bottom: 12px;
+            }
+            .sp-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(59,173,138,0.45); }
+            .sp-guarantee {
+                display: flex; align-items: center; justify-content: center; gap: 8px;
+                font-size: 12px; color: var(--text-muted); font-family: var(--font-display);
+            }
+
+            /* COUNTDOWN */
+            .sp-countdown {
+                background: linear-gradient(135deg, #1C1C1A, #2A2A28);
+                padding: 16px 24px; text-align: center;
+                position: sticky; top: 70px; z-index: 100;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+            }
+            .sp-countdown-inner {
+                max-width: 700px; margin: 0 auto;
+                display: flex; align-items: center; justify-content: center; gap: 20px;
+                flex-wrap: wrap;
+            }
+            .sp-countdown-text { color: rgba(255,255,255,0.8); font-size: 14px; font-family: var(--font-display); }
+            .sp-countdown-text strong { color: var(--accent); }
+            .sp-timer { display: flex; gap: 8px; align-items: center; }
+            .sp-timer-unit { text-align: center; }
+            .sp-timer-num {
+                background: rgba(255,255,255,0.1); color: white;
+                font-size: 22px; font-weight: 900; font-family: var(--font-display);
+                padding: 4px 12px; border-radius: 8px; min-width: 48px;
+                display: block;
+            }
+            .sp-timer-label { font-size: 9px; color: rgba(255,255,255,0.4); font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 3px; }
+            .sp-timer-sep { color: rgba(255,255,255,0.3); font-size: 20px; font-weight: 700; padding-bottom: 12px; }
+
+            /* WHAT YOU GET */
+            .sp-section { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
+            .sp-section-label {
+                font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+                color: var(--primary); font-family: var(--font-display); margin-bottom: 12px;
+            }
+            .sp-section-title {
+                font-size: clamp(26px, 3.5vw, 38px); font-weight: 800; letter-spacing: -0.03em;
+                font-family: var(--font-display); color: var(--text-main); margin-bottom: 16px;
+                line-height: 1.15;
+            }
+            .sp-section-sub { font-size: 17px; color: var(--text-muted); max-width: 560px; line-height: 1.7; }
+
+            /* PRODUCT SHOWCASE CARDS */
+            .sp-products { display: flex; flex-direction: column; gap: 40px; margin-top: 60px; }
+            .sp-product {
+                display: grid; grid-template-columns: 1fr 1fr;
+                gap: 48px; align-items: center;
+                background: white; border-radius: 24px; padding: 48px;
+                border: 1px solid var(--border);
+                box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+                transition: 0.3s;
+            }
+            .sp-product:hover { box-shadow: 0 12px 48px rgba(0,0,0,0.09); transform: translateY(-3px); }
+            .sp-product.reverse { direction: rtl; }
+            .sp-product.reverse > * { direction: ltr; }
+            @media (max-width: 768px) {
+                .sp-product { grid-template-columns: 1fr; padding: 28px; }
+                .sp-product.reverse { direction: ltr; }
+            }
+            .sp-product-visual {
+                border-radius: 16px; overflow: hidden;
+                aspect-ratio: 4/3;
+                display: flex; align-items: center; justify-content: center;
+            }
+            .sp-product-num {
+                display: inline-flex; align-items: center; gap: 8px;
+                font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+                color: var(--primary); font-family: var(--font-display); margin-bottom: 12px;
+            }
+            .sp-product h3 {
+                font-size: 24px; font-weight: 800; font-family: var(--font-display);
+                letter-spacing: -0.02em; margin-bottom: 12px; color: var(--text-main);
+            }
+            .sp-product p { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+            .sp-benefit-list { list-style: none; padding: 0; margin: 0; }
+            .sp-benefit-list li {
+                display: flex; gap: 10px; align-items: flex-start;
+                font-size: 14px; color: #444; padding: 7px 0;
+                border-bottom: 1px solid var(--border);
+            }
+            .sp-benefit-list li:last-child { border-bottom: none; }
+            .sp-benefit-list .ck {
+                color: var(--primary); font-weight: 800; flex-shrink: 0;
+                margin-top: 1px;
+            }
+            .sp-product-price-tag {
+                display: inline-flex; align-items: center; gap: 8px;
+                margin-top: 16px;
+                background: var(--primary-light); border-radius: 10px;
+                padding: 8px 16px;
+            }
+            .sp-product-price-tag s { color: #bbb; font-size: 13px; font-family: var(--font-display); }
+            .sp-product-price-tag strong { color: var(--primary); font-size: 18px; font-family: var(--font-display); font-weight: 900; }
+
+            /* WHY BUNDLE */
+            .sp-why { background: linear-gradient(160deg, #0F2A1E 0%, #1A3D2B 100%); padding: 80px 0; }
+            .sp-why-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+            .sp-why h2 { color: white; font-size: clamp(26px, 3.5vw, 38px); font-family: var(--font-display); letter-spacing: -0.03em; margin-bottom: 14px; }
+            .sp-why-sub { color: rgba(255,255,255,0.6); font-size: 17px; line-height: 1.7; margin-bottom: 56px; max-width: 560px; }
+            .sp-compare {
+                display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+            }
+            @media (max-width: 700px) { .sp-compare { grid-template-columns: 1fr; } }
+            .sp-compare-col {
+                border-radius: 20px; padding: 36px; position: relative; overflow: hidden;
+            }
+            .sp-compare-col.bad {
+                background: rgba(255,255,255,0.05);
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+            .sp-compare-col.good {
+                background: var(--primary);
+                border: 1px solid rgba(255,255,255,0.2);
+            }
+            .sp-compare-col h4 {
+                font-size: 16px; font-weight: 800; font-family: var(--font-display);
+                margin-bottom: 24px; color: white;
+            }
+            .sp-compare-list { list-style: none; padding: 0; }
+            .sp-compare-list li {
+                display: flex; align-items: flex-start; gap: 10px;
+                font-size: 14px; padding: 9px 0; color: rgba(255,255,255,0.75);
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            .sp-compare-list li:last-child { border-bottom: none; }
+            .sp-compare-list .ic { flex-shrink: 0; }
+
+            /* TESTIMONIALS */
+            .sp-testi-section { background: #F5F5F2; padding: 80px 0; }
+            .sp-testi-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+            .sp-testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+            @media (max-width: 768px) { .sp-testi-grid { grid-template-columns: 1fr; } }
+            .sp-testi-card {
+                background: white; border-radius: 18px; padding: 28px;
+                border: 1px solid var(--border); position: relative;
+            }
+            .sp-testi-card::before {
+                content: '"'; position: absolute; top: 16px; right: 20px;
+                font-size: 60px; color: var(--primary-light); line-height: 1;
+                font-family: Georgia, serif; pointer-events: none;
+            }
+            .sp-testi-stars { color: var(--accent); font-size: 14px; margin-bottom: 14px; }
+            .sp-testi-text { font-size: 14px; line-height: 1.7; color: #444; margin-bottom: 20px; font-style: italic; }
+            .sp-testi-author { display: flex; align-items: center; gap: 12px; }
+            .sp-testi-avatar {
+                width: 40px; height: 40px; border-radius: 50%;
+                background: var(--primary-light); display: flex; align-items: center; justify-content: center; font-size: 20px;
+            }
+            .sp-testi-name { font-size: 13px; font-weight: 700; font-family: var(--font-display); color: var(--text-main); }
+            .sp-testi-info { font-size: 11px; color: var(--text-muted); }
+
+            /* FAQ */
+            .sp-faq-section { max-width: 800px; margin: 0 auto; padding: 80px 24px; }
+            .sp-faq-item {
+                border-bottom: 1px solid var(--border); padding: 20px 0;
+            }
+            .sp-faq-q {
+                font-size: 16px; font-weight: 700; font-family: var(--font-display);
+                color: var(--text-main); cursor: pointer;
+                display: flex; justify-content: space-between; align-items: center;
+                gap: 16px;
+            }
+            .sp-faq-a { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-top: 12px; display: none; }
+            .sp-faq-item.open .sp-faq-a { display: block; }
+            .sp-faq-icon { color: var(--primary); font-size: 20px; flex-shrink: 0; transition: 0.2s; }
+            .sp-faq-item.open .sp-faq-icon { transform: rotate(45deg); }
+
+            /* FINAL CTA */
+            .sp-final-cta {
+                background: linear-gradient(160deg, #0F2A1E 0%, #1A3D2B 100%);
+                padding: 100px 0; text-align: center; position: relative; overflow: hidden;
+            }
+            .sp-final-cta::before {
+                content: '';
+                position: absolute; inset: 0;
+                background: radial-gradient(ellipse at 50% 0%, rgba(59,173,138,0.3) 0%, transparent 60%);
+                pointer-events: none;
+            }
+            .sp-final-inner { max-width: 600px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+            .sp-final-cta h2 { color: white; font-size: clamp(28px, 4vw, 42px); font-family: var(--font-display); margin-bottom: 16px; letter-spacing: -0.03em; }
+            .sp-final-cta p { color: rgba(255,255,255,0.65); font-size: 17px; line-height: 1.7; margin-bottom: 40px; }
+            .sp-final-price {
+                margin-bottom: 32px;
+            }
+            .sp-final-price .old { color: rgba(255,255,255,0.3); font-size: 18px; text-decoration: line-through; font-family: var(--font-display); }
+            .sp-final-price .new { color: white; font-size: 56px; font-weight: 900; font-family: var(--font-display); line-height: 1; }
+            .sp-final-price .tag { display: inline-block; background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.3); color: #FCA5A5; padding: 3px 12px; border-radius: 20px; font-size: 13px; font-weight: 700; font-family: var(--font-display); margin-left: 10px; }
+            .sp-final-note { color: rgba(255,255,255,0.35); font-size: 12px; font-family: var(--font-display); margin-top: 14px; }
+            .sp-also-individual { margin-top: 40px; color: rgba(255,255,255,0.35); font-size: 13px; font-family: var(--font-display); }
+            .sp-also-individual a { color: rgba(255,255,255,0.5); text-decoration: underline; cursor: pointer; }
+
+            /* Sticky mobile CTA */
+            .sp-sticky-mobile {
+                display: none;
+                position: fixed; bottom: 60px; left: 16px; right: 16px; z-index: 500;
+            }
+            @media (max-width: 768px) { .sp-sticky-mobile { display: block; } }
+            .sp-sticky-btn {
+                display: block; width: 100%;
+                background: linear-gradient(135deg, #3BAD8A, #2A8A6C);
+                color: white; text-align: center; padding: 16px;
+                border-radius: 14px; font-size: 16px; font-weight: 800;
+                font-family: var(--font-display);
+                box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+                text-decoration: none; border: none; cursor: pointer;
+            }
+            </style>
+
+            <!-- ===== COUNTDOWN BAR ===== -->
+            <div class="sp-countdown">
+                <div class="sp-countdown-inner">
+                    <div class="sp-countdown-text">⚡ <strong>Harga Spesial</strong> berakhir dalam:</div>
+                    <div class="sp-timer">
+                        <div class="sp-timer-unit">
+                            <span class="sp-timer-num" id="cd-h">02</span>
+                            <span class="sp-timer-label">Jam</span>
+                        </div>
+                        <span class="sp-timer-sep">:</span>
+                        <div class="sp-timer-unit">
+                            <span class="sp-timer-num" id="cd-m">47</span>
+                            <span class="sp-timer-label">Menit</span>
+                        </div>
+                        <span class="sp-timer-sep">:</span>
+                        <div class="sp-timer-unit">
+                            <span class="sp-timer-num" id="cd-s">33</span>
+                            <span class="sp-timer-label">Detik</span>
+                        </div>
+                    </div>
+                    <div class="sp-countdown-text">Setelah itu kembali <strong>Rp 40.000</strong></div>
+                </div>
+            </div>
+
+            <!-- ===== HERO ===== -->
+            <div class="sp-hero">
+                <div class="sp-hero-grid">
+                    <div>
+                        <div class="sp-eyebrow"><span>●</span> Penawaran Terbatas — Diskon 37%</div>
+                        <h1>Solusi Lengkap GTM &amp; MPASI dalam <em>Satu Bundle</em> Praktis</h1>
+                        <p class="sp-hero-sub">4 panduan PDF siap cetak yang dirancang khusus untuk Mama Indonesia — dari mengatasi GTM sampai memantau tumbuh kembang si kecil sesuai standar WHO.</p>
+                        <div class="sp-social-proof">
+                            <div class="sp-avatars">
+                                <div class="sp-avatar">👩</div>
+                                <div class="sp-avatar" style="background:#F97316">👩</div>
+                                <div class="sp-avatar" style="background:#3B82F6">👩</div>
+                                <div class="sp-avatar" style="background:#8B5CF6">👩</div>
+                            </div>
+                            <span>
+                                <span class="sp-stars">★★★★★</span>
+                                <strong style="color:white"> 4.9/5</strong> dari 200+ Mama Indonesia
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- PRICE CARD -->
+                    <div class="sp-hero-visual">
+                        <div class="sp-price-card">
+                            <div class="sp-bestseller">🔥 Terlaris & Terlengkap</div>
+                            <div class="sp-card-title">Bundle Super Mama Kit</div>
+
+                            <div class="sp-card-items">
+                                <div class="sp-card-item">
+                                    <div class="sp-item-icon" style="background:#EAF6F1">📄</div>
+                                    <div>
+                                        <div class="sp-item-name">Panduan GTM Lengkap</div>
+                                        <div style="font-size:11px; color:var(--text-muted)">7 penyebab + 8 strategi teruji</div>
+                                    </div>
+                                    <div class="sp-item-price">Rp10rb</div>
+                                </div>
+                                <div class="sp-card-item">
+                                    <div class="sp-item-icon" style="background:#EEF2FF">📊</div>
+                                    <div>
+                                        <div class="sp-item-name">Chart BB/TB WHO</div>
+                                        <div style="font-size:11px; color:var(--text-muted)">Standar internasional siap cetak</div>
+                                    </div>
+                                    <div class="sp-item-price">Rp10rb</div>
+                                </div>
+                                <div class="sp-card-item">
+                                    <div class="sp-item-icon" style="background:#FFF5F5">📋</div>
+                                    <div>
+                                        <div class="sp-item-name">Log Makan Harian</div>
+                                        <div style="font-size:11px; color:var(--text-muted)">Tracker 30 hari + weekly review</div>
+                                    </div>
+                                    <div class="sp-item-price">Rp10rb</div>
+                                </div>
+                                <div class="sp-card-item">
+                                    <div class="sp-item-icon" style="background:#FFFBEB">🗓️</div>
+                                    <div>
+                                        <div class="sp-item-name">Kalender MPASI</div>
+                                        <div style="font-size:11px; color:var(--text-muted)">Panduan menu 6–12 bulan lengkap</div>
+                                    </div>
+                                    <div class="sp-item-price">Rp10rb</div>
+                                </div>
+                            </div>
+
+                            <div class="sp-price-row">
+                                <div class="sp-old-price">
+                                    Total satuan: <s>Rp 40.000</s>
+                                    <span class="sp-discount-badge">HEMAT 37%</span>
+                                </div>
+                                <div class="sp-new-price">Rp 25.000</div>
+                                <div class="sp-price-note">Sekali bayar · Download selamanya · PDF siap cetak</div>
+                            </div>
+
+                            <a href="https://lynk.id" target="_blank" class="sp-cta-btn">
+                                🛍️ Beli Bundle Sekarang →
+                            </a>
+                            <div class="sp-guarantee">
+                                🔒 Pembayaran aman · 📦 Download instan
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PRODUCT SHOWCASE ===== -->
+            <div class="sp-section">
+                <div class="sp-section-label">Isi Bundle</div>
+                <h2 class="sp-section-title">4 Panduan yang Mama Dapat — Masing-Masing Bernilai</h2>
+                <p class="sp-section-sub">Bukan sekadar PDF biasa. Setiap panduan dirancang khusus untuk bisa langsung dipakai Mama hari ini.</p>
+
+                <div class="sp-products">
+
+                    <!-- PRODUCT 1 -->
+                    <div class="sp-product">
+                        <div class="sp-product-visual">
+                            <svg viewBox="0 0 420 320" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="420" height="320" fill="#EAF6F1" rx="16"/>
+                                <!-- Page mockup -->
+                                <rect x="30" y="24" width="240" height="280" rx="12" fill="white" filter="drop-shadow(0 4px 16px rgba(0,0,0,0.12))"/>
+                                <!-- Header bar -->
+                                <rect x="30" y="24" width="240" height="52" rx="12" fill="#3BAD8A"/>
+                                <rect x="30" y="60" width="240" height="16" rx="0" fill="#3BAD8A"/>
+                                <text x="150" y="56" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">Panduan GTM Lengkap</text>
+                                <!-- Content lines -->
+                                <rect x="50" y="94" width="80" height="8" rx="4" fill="#3BAD8A" opacity="0.4"/>
+                                <rect x="50" y="110" width="190" height="6" rx="3" fill="#e0e0e0"/>
+                                <rect x="50" y="122" width="160" height="6" rx="3" fill="#e0e0e0"/>
+                                <rect x="50" y="134" width="175" height="6" rx="3" fill="#e0e0e0"/>
+                                <!-- Cards row -->
+                                <rect x="50" y="156" width="86" height="60" rx="8" fill="#EAF6F1" stroke="#3BAD8A" stroke-width="1"/>
+                                <text x="93" y="185" text-anchor="middle" font-size="18" font-family="sans-serif">🦷</text>
+                                <rect x="50" y="224" width="86" height="6" rx="3" fill="#3BAD8A" opacity="0.3"/>
+                                <rect x="144" y="156" width="86" height="60" rx="8" fill="#EAF6F1" stroke="#3BAD8A" stroke-width="1"/>
+                                <text x="187" y="185" text-anchor="middle" font-size="18" font-family="sans-serif">😰</text>
+                                <rect x="144" y="224" width="86" height="6" rx="3" fill="#3BAD8A" opacity="0.3"/>
+                                <!-- Checklist -->
+                                <rect x="50" y="244" width="190" height="6" rx="3" fill="#e0e0e0"/>
+                                <rect x="50" y="256" width="145" height="6" rx="3" fill="#e0e0e0"/>
+                                <rect x="50" y="268" width="170" height="6" rx="3" fill="#e0e0e0"/>
+                                <!-- Second doc shadow -->
+                                <rect x="200" y="60" width="200" height="248" rx="12" fill="white" opacity="0.6" filter="drop-shadow(0 2px 8px rgba(0,0,0,0.08))"/>
+                                <rect x="200" y="60" width="200" height="36" rx="12" fill="#2A8A6C" opacity="0.7"/>
+                                <rect x="200" y="80" width="200" height="16" rx="0" fill="#2A8A6C" opacity="0.7"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="sp-product-num">📄 Panduan 01</div>
+                            <h3>Panduan GTM Lengkap</h3>
+                            <p>Panduan 30+ halaman yang membahas secara tuntas mengapa anak GTM dan strategi apa yang benar-benar bekerja — berdasarkan penelitian dan pengalaman ribuan keluarga.</p>
+                            <ul class="sp-benefit-list">
+                                <li><span class="ck">✓</span> 7 penyebab GTM yang sering diabaikan orang tua</li>
+                                <li><span class="ck">✓</span> 8 strategi mengatasi GTM step-by-step</li>
+                                <li><span class="ck">✓</span> Panduan Division of Responsibility (DoR)</li>
+                                <li><span class="ck">✓</span> Tabel tahapan MPASI per usia (6–12 bulan)</li>
+                                <li><span class="ck">✓</span> Contoh menu MPASI 4 bintang lengkap</li>
+                                <li><span class="ck">✓</span> Checklist kapan harus ke dokter</li>
+                            </ul>
+                            <div class="sp-product-price-tag">
+                                <s>Rp 10.000</s>
+                                <strong>Sudah termasuk di bundle</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PRODUCT 2 -->
+                    <div class="sp-product reverse">
+                        <div class="sp-product-visual">
+                            <svg viewBox="0 0 420 320" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="420" height="320" fill="#EEF2FF" rx="16"/>
+                                <rect x="30" y="24" width="360" height="272" rx="12" fill="white" filter="drop-shadow(0 4px 16px rgba(0,0,0,0.12))"/>
+                                <rect x="30" y="24" width="360" height="44" rx="12" fill="#667EEA"/>
+                                <rect x="30" y="52" width="360" height="16" rx="0" fill="#667EEA"/>
+                                <text x="210" y="50" text-anchor="middle" fill="white" font-size="12" font-weight="700" font-family="sans-serif">Chart BB/TB — Standar WHO 2006</text>
+                                <!-- Chart axes -->
+                                <line x1="65" y1="80" x2="65" y2="260" stroke="#667EEA" stroke-width="2"/>
+                                <line x1="65" y1="260" x2="370" y2="260" stroke="#667EEA" stroke-width="2"/>
+                                <!-- Grid lines -->
+                                <line x1="65" y1="110" x2="370" y2="110" stroke="#e0e0e0" stroke-width="1"/>
+                                <line x1="65" y1="140" x2="370" y2="140" stroke="#e0e0e0" stroke-width="1"/>
+                                <line x1="65" y1="170" x2="370" y2="170" stroke="#e0e0e0" stroke-width="1"/>
+                                <line x1="65" y1="200" x2="370" y2="200" stroke="#e0e0e0" stroke-width="1"/>
+                                <line x1="65" y1="230" x2="370" y2="230" stroke="#e0e0e0" stroke-width="1"/>
+                                <!-- +3 SD -->
+                                <polyline points="65,220 120,185 175,168 230,156 285,146 340,136 370,130" fill="none" stroke="#F56565" stroke-width="2" stroke-dasharray="4,3"/>
+                                <!-- +2 SD -->
+                                <polyline points="65,228 120,196 175,180 230,169 285,160 340,151 370,146" fill="none" stroke="#3B82F6" stroke-width="2"/>
+                                <!-- Median -->
+                                <polyline points="65,238 120,211 175,197 230,188 285,180 340,172 370,168" fill="none" stroke="#3BAD8A" stroke-width="2.5"/>
+                                <!-- -2 SD -->
+                                <polyline points="65,248 120,229 175,217 230,209 285,202 340,196 370,192" fill="none" stroke="#F59E0B" stroke-width="2"/>
+                                <!-- Child dot -->
+                                <circle cx="230" cy="183" r="6" fill="#F97316" stroke="white" stroke-width="2"/>
+                                <line x1="230" y1="183" x2="230" y2="260" stroke="#F97316" stroke-width="1" stroke-dasharray="3,2"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="sp-product-num">📊 Panduan 02</div>
+                            <h3>Chart BB/TB Standar WHO</h3>
+                            <p>Grafik pertumbuhan standar WHO 2006 dalam format A4 siap cetak beresolusi tinggi — untuk laki-laki dan perempuan, usia 0–5 tahun.</p>
+                            <ul class="sp-benefit-list">
+                                <li><span class="ck">✓</span> Tabel BB & PB/TB standar WHO 0–24 bulan</li>
+                                <li><span class="ck">✓</span> Grafik kurva pertumbuhan visual (laki-laki & perempuan)</li>
+                                <li><span class="ck">✓</span> Panduan cara baca Z-score dengan mudah</li>
+                                <li><span class="ck">✓</span> Tabel interpretasi status gizi (5 kategori)</li>
+                                <li><span class="ck">✓</span> Panduan usia koreksi untuk bayi prematur</li>
+                                <li><span class="ck">✓</span> Format A4 · resolusi tinggi · siap cetak</li>
+                            </ul>
+                            <div class="sp-product-price-tag">
+                                <s>Rp 10.000</s>
+                                <strong>Sudah termasuk di bundle</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PRODUCT 3 -->
+                    <div class="sp-product">
+                        <div class="sp-product-visual">
+                            <svg viewBox="0 0 420 320" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="420" height="320" fill="#FFF5F5" rx="16"/>
+                                <rect x="30" y="24" width="260" height="280" rx="12" fill="white" filter="drop-shadow(0 4px 16px rgba(0,0,0,0.12))"/>
+                                <rect x="30" y="24" width="260" height="52" rx="12" fill="#F093FB"/>
+                                <rect x="30" y="55" width="260" height="21" rx="0" fill="#EC4899"/>
+                                <text x="160" y="52" text-anchor="middle" fill="white" font-size="12" font-weight="700" font-family="sans-serif">Log Makan Harian</text>
+                                <!-- Time rows -->
+                                <rect x="44" y="84" width="236" height="38" rx="6" fill="#FFF5F5" stroke="#FED7D7" stroke-width="1"/>
+                                <text x="60" y="100" fill="#C53030" font-size="10" font-family="sans-serif">🌅 Pagi</text>
+                                <rect x="105" y="90" width="160" height="5" rx="2" fill="#e0e0e0"/>
+                                <rect x="105" y="102" width="130" height="5" rx="2" fill="#e0e0e0"/>
+                                <rect x="44" y="128" width="236" height="38" rx="6" fill="#FFF5F5" stroke="#FED7D7" stroke-width="1"/>
+                                <text x="60" y="144" fill="#C53030" font-size="10" font-family="sans-serif">☀️ Siang</text>
+                                <rect x="105" y="134" width="160" height="5" rx="2" fill="#e0e0e0"/>
+                                <rect x="105" y="146" width="130" height="5" rx="2" fill="#e0e0e0"/>
+                                <rect x="44" y="172" width="236" height="38" rx="6" fill="#FFF5F5" stroke="#FED7D7" stroke-width="1"/>
+                                <text x="60" y="188" fill="#C53030" font-size="10" font-family="sans-serif">🌆 Sore</text>
+                                <rect x="105" y="178" width="160" height="5" rx="2" fill="#e0e0e0"/>
+                                <rect x="105" y="190" width="130" height="5" rx="2" fill="#e0e0e0"/>
+                                <!-- Food group icons -->
+                                <rect x="44" y="220" width="236" height="68" rx="8" fill="#FFF5F5" stroke="#FED7D7" stroke-width="1"/>
+                                <text x="68" y="250" text-anchor="middle" font-size="18" font-family="sans-serif">🍚</text>
+                                <text x="108" y="250" text-anchor="middle" font-size="18" font-family="sans-serif">🥩</text>
+                                <text x="148" y="250" text-anchor="middle" font-size="18" font-family="sans-serif">🥦</text>
+                                <text x="188" y="250" text-anchor="middle" font-size="18" font-family="sans-serif">🍊</text>
+                                <text x="228" y="250" text-anchor="middle" font-size="18" font-family="sans-serif">🧈</text>
+                                <circle cx="68" cy="270" r="7" fill="none" stroke="#FED7D7" stroke-width="1.5"/>
+                                <circle cx="108" cy="270" r="7" fill="none" stroke="#FED7D7" stroke-width="1.5"/>
+                                <circle cx="148" cy="270" r="7" fill="none" stroke="#FED7D7" stroke-width="1.5"/>
+                                <circle cx="188" cy="270" r="7" fill="#EC4899" opacity="0.3"/>
+                                <circle cx="228" cy="270" r="7" fill="none" stroke="#FED7D7" stroke-width="1.5"/>
+                                <!-- Second page -->
+                                <rect x="270" y="60" width="130" height="220" rx="10" fill="white" opacity="0.7" filter="drop-shadow(0 2px 8px rgba(0,0,0,0.1))"/>
+                                <rect x="270" y="60" width="130" height="30" rx="10" fill="#EC4899" opacity="0.6"/>
+                                <text x="335" y="79" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif" font-weight="700">Weekly Tracker</text>
+                                <rect x="282" y="100" width="106" height="6" rx="3" fill="#e0e0e0"/>
+                                <rect x="282" y="112" width="85" height="6" rx="3" fill="#e0e0e0"/>
+                                <rect x="282" y="128" width="106" height="28" rx="6" fill="#FFF5F5" stroke="#FED7D7" stroke-width="1"/>
+                                <rect x="282" y="162" width="106" height="28" rx="6" fill="#FFF5F5" stroke="#FED7D7" stroke-width="1"/>
+                                <rect x="282" y="196" width="106" height="28" rx="6" fill="#FFF5F5" stroke="#FED7D7" stroke-width="1"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="sp-product-num">📋 Panduan 03</div>
+                            <h3>Log Makan Harian</h3>
+                            <p>Template jurnal harian yang membantu Mama mencatat secara sistematis apa yang dimakan, reaksi anak, dan tren pola makan selama 30 hari.</p>
+                            <ul class="sp-benefit-list">
+                                <li><span class="ck">✓</span> Form 4 sesi makan per hari (pagi, siang, sore, malam)</li>
+                                <li><span class="ck">✓</span> Checklist reaksi anak (Suka/Biasa/GTM/Alergi?)</li>
+                                <li><span class="ck">✓</span> Checklist 8 kelompok makanan harian</li>
+                                <li><span class="ck">✓</span> Weekly tracker 7 hari + kolom evaluasi</li>
+                                <li><span class="ck">✓</span> Tabel pemantauan BB mingguan</li>
+                                <li><span class="ck">✓</span> Cetak ulang sebanyak yang dibutuhkan</li>
+                            </ul>
+                            <div class="sp-product-price-tag">
+                                <s>Rp 10.000</s>
+                                <strong>Sudah termasuk di bundle</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PRODUCT 4 -->
+                    <div class="sp-product reverse">
+                        <div class="sp-product-visual">
+                            <svg viewBox="0 0 420 320" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="420" height="320" fill="#FFFBEB" rx="16"/>
+                                <rect x="20" y="20" width="380" height="280" rx="14" fill="white" filter="drop-shadow(0 4px 16px rgba(0,0,0,0.12))"/>
+                                <!-- Calendar header -->
+                                <rect x="20" y="20" width="380" height="50" rx="14" fill="url(#calGrad)"/>
+                                <rect x="20" y="54" width="380" height="16" rx="0" fill="#F97316" opacity="0.8"/>
+                                <defs><linearGradient id="calGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#F6D365"/><stop offset="100%" stop-color="#FDA085"/></linearGradient></defs>
+                                <text x="210" y="48" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="sans-serif">🗓️ Kalender MPASI — Bulan 6</text>
+                                <!-- Day headers -->
+                                <text x="60" y="84" text-anchor="middle" fill="#888" font-size="9" font-family="sans-serif">Sen</text>
+                                <text x="114" y="84" text-anchor="middle" fill="#888" font-size="9" font-family="sans-serif">Sel</text>
+                                <text x="168" y="84" text-anchor="middle" fill="#888" font-size="9" font-family="sans-serif">Rab</text>
+                                <text x="222" y="84" text-anchor="middle" fill="#888" font-size="9" font-family="sans-serif">Kam</text>
+                                <text x="276" y="84" text-anchor="middle" fill="#888" font-size="9" font-family="sans-serif">Jum</text>
+                                <text x="330" y="84" text-anchor="middle" fill="#E53E3E" font-size="9" font-family="sans-serif">Sab</text>
+                                <text x="384" y="84" text-anchor="middle" fill="#E53E3E" font-size="9" font-family="sans-serif">Min</text>
+                                <!-- Grid cells row 1 -->
+                                <rect x="33" y="89" width="53" height="50" rx="6" fill="#FEF9EC" stroke="#F6D365" stroke-width="1.5"/>
+                                <text x="42" y="103" fill="#B7451A" font-size="10" font-weight="700" font-family="sans-serif">1</text>
+                                <text x="60" y="112" text-anchor="middle" fill="#888" font-size="8" font-family="sans-serif">Pure Labu</text>
+                                <text x="60" y="122" text-anchor="middle" fill="#888" font-size="8" font-family="sans-serif">🎉 Hari 1!</text>
+                                <rect x="87" y="89" width="53" height="50" rx="6" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+                                <text x="96" y="103" fill="#B7451A" font-size="10" font-weight="700" font-family="sans-serif">2</text>
+                                <text x="114" y="114" text-anchor="middle" fill="#888" font-size="8" font-family="sans-serif">Pure Labu</text>
+                                <rect x="141" y="89" width="53" height="50" rx="6" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+                                <text x="150" y="103" fill="#B7451A" font-size="10" font-weight="700" font-family="sans-serif">3</text>
+                                <text x="168" y="114" text-anchor="middle" fill="#888" font-size="8" font-family="sans-serif">Pure Labu</text>
+                                <rect x="195" y="89" width="53" height="50" rx="6" fill="#FFF0E6" stroke="#F6D365" stroke-width="1"/>
+                                <text x="204" y="103" fill="#B7451A" font-size="10" font-weight="700" font-family="sans-serif">4</text>
+                                <text x="222" y="110" text-anchor="middle" fill="#888" font-size="8" font-family="sans-serif">🆕 Kentang</text>
+                                <text x="222" y="122" text-anchor="middle" fill="#F97316" font-size="7" font-family="sans-serif">Bahan Baru</text>
+                                <rect x="249" y="89" width="53" height="50" rx="6" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+                                <text x="258" y="103" fill="#B7451A" font-size="10" font-weight="700" font-family="sans-serif">5</text>
+                                <!-- Row 2 -->
+                                <rect x="33" y="145" width="53" height="50" rx="6" fill="#FFF0E6" stroke="#F6D365" stroke-width="1"/>
+                                <text x="42" y="159" fill="#B7451A" font-size="10" font-weight="700" font-family="sans-serif">8</text>
+                                <text x="60" y="169" text-anchor="middle" fill="#888" font-size="8" font-family="sans-serif">🆕 Ubi Jalar</text>
+                                <rect x="87" y="145" width="53" height="50" rx="6" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+                                <text x="96" y="159" fill="#B7451A" font-size="10" font-weight="700" font-family="sans-serif">9</text>
+                                <rect x="141" y="145" width="53" height="50" rx="6" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+                                <text x="150" y="159" fill="#B7451A" font-size="10" font-weight="700" font-family="sans-serif">10</text>
+                                <rect x="195" y="145" width="53" height="50" rx="6" fill="#FFF0E6" stroke="#F6D365" stroke-width="1"/>
+                                <text x="204" y="159" fill="#B7451A" font-size="10" font-weight="700" font-family="sans-serif">11</text>
+                                <text x="222" y="169" text-anchor="middle" fill="#888" font-size="8" font-family="sans-serif">🆕 Wortel</text>
+                                <!-- Row 3 -->
+                                <rect x="33" y="201" width="53" height="50" rx="6" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+                                <text x="42" y="215" fill="#B7451A" font-size="10" font-weight="700" font-family="sans-serif">15</text>
+                                <rect x="87" y="201" width="53" height="50" rx="6" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+                                <text x="96" y="215" fill="#B7451A" font-size="10" font-weight="700" font-family="sans-serif">16</text>
+                                <rect x="141" y="201" width="53" height="50" rx="6" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+                                <text x="150" y="215" fill="#B7451A" font-size="10" font-weight="700" font-family="sans-serif">17</text>
+                                <rect x="195" y="201" width="53" height="50" rx="6" fill="#FFF0E6" stroke="#F6D365" stroke-width="1"/>
+                                <text x="204" y="215" fill="#B7451A" font-size="10" font-weight="700" font-family="sans-serif">18</text>
+                                <text x="222" y="225" text-anchor="middle" fill="#888" font-size="8" font-family="sans-serif">🆕 Ayam</text>
+                                <rect x="249" y="201" width="53" height="50" rx="6" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+                                <text x="258" y="215" fill="#B7451A" font-size="10" font-weight="700" font-family="sans-serif">19</text>
+                                <rect x="303" y="201" width="53" height="50" rx="6" fill="#FFF8F5" stroke="#e0e0e0" stroke-width="1"/>
+                                <text x="312" y="215" fill="#E53E3E" font-size="10" font-weight="700" font-family="sans-serif">20</text>
+                                <rect x="357" y="201" width="53" height="50" rx="6" fill="#FEF9EC" stroke="#F6D365" stroke-width="1.5"/>
+                                <text x="366" y="215" fill="#E53E3E" font-size="10" font-weight="700" font-family="sans-serif">21</text>
+                                <text x="384" y="228" text-anchor="middle" fill="#F97316" font-size="7" font-family="sans-serif">⚖️ Timbang</text>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="sp-product-num">🗓️ Panduan 04</div>
+                            <h3>Kalender MPASI 6–12 Bulan</h3>
+                            <p>Kalender hari-per-hari yang memandu Mama dalam memperkenalkan makanan baru secara sistematis, aman, dan terstruktur dari bulan 6 hingga 12.</p>
+                            <ul class="sp-benefit-list">
+                                <li><span class="ck">✓</span> Kalender grid lengkap bulan 6, 7–8, dan 9–12</li>
+                                <li><span class="ck">✓</span> Jadwal pengenalan bahan makanan baru setiap 3–5 hari</li>
+                                <li><span class="ck">✓</span> Menu harian sudah dicantumkan di tiap tanggal</li>
+                                <li><span class="ck">✓</span> Timeline fase MPASI visual (puree → finger food → makanan keluarga)</li>
+                                <li><span class="ck">✓</span> Milestone checklist 9–10 dan 11–12 bulan</li>
+                                <li><span class="ck">✓</span> Jadwal makan ideal harian per fase usia</li>
+                            </ul>
+                            <div class="sp-product-price-tag">
+                                <s>Rp 10.000</s>
+                                <strong>Sudah termasuk di bundle</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== WHY BUNDLE ===== -->
+            <div class="sp-why">
+                <div class="sp-why-inner">
+                    <div class="sp-section-label" style="color:#4ECCA3">Kenapa Bundle?</div>
+                    <h2>Beli Satuan vs Ambil Bundle — Pilihan Jelas</h2>
+                    <p class="sp-why-sub">Semua panduan ini saling melengkapi. Tanpa satu, yang lain jadi kurang optimal.</p>
+                    <div class="sp-compare">
+                        <div class="sp-compare-col bad">
+                            <h4>❌ Beli Satuan</h4>
+                            <ul class="sp-compare-list">
+                                <li><span class="ic">😟</span> Bayar Rp 10.000 × 4 = Rp 40.000 total</li>
+                                <li><span class="ic">😟</span> Checkout 4 kali terpisah</li>
+                                <li><span class="ic">😟</span> Tidak ada panduan urutan pemakaian</li>
+                                <li><span class="ic">😟</span> Panduan tidak terintegrasi satu sama lain</li>
+                                <li><span class="ic">😟</span> Lebih mahal, lebih ribet</li>
+                            </ul>
+                        </div>
+                        <div class="sp-compare-col good">
+                            <h4>✅ Bundle Super Mama Kit</h4>
+                            <ul class="sp-compare-list">
+                                <li><span class="ic">😍</span> Hanya Rp 25.000 — hemat Rp 15.000</li>
+                                <li><span class="ic">😍</span> Satu kali checkout, semua langsung dapat</li>
+                                <li><span class="ic">😍</span> Panduan terintegrasi — saling melengkapi</li>
+                                <li><span class="ic">😍</span> Urutan penggunaan sudah dirancang</li>
+                                <li><span class="ic">😍</span> Lebih hemat 37%, tanpa ribet</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="text-align:center; margin-top:48px">
+                        <a href="https://lynk.id" target="_blank" class="sp-cta-btn" style="display:inline-flex; align-items:center; gap:10px; max-width:360px; font-size:18px; padding:20px 40px; border-radius:16px;">
+                            🛍️ Ambil Bundle Sekarang — Rp 25.000
+                        </a>
+                        <div style="color:rgba(255,255,255,0.3); font-size:13px; margin-top:12px; font-family:var(--font-display)">
+                            Sekali bayar · Download selamanya · 4 file PDF
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== TESTIMONIALS ===== -->
+            <div class="sp-testi-section">
+                <div class="sp-testi-inner">
+                    <div class="sp-section-label">Testimoni</div>
+                    <h2 class="sp-section-title">200+ Mama Sudah Membuktikan</h2>
+                    <p class="sp-section-sub">Bukan klaim kami — ini dari Mama Indonesia yang sudah pakai bundlenya langsung.</p>
+                    <div class="sp-testi-grid">
+                        <div class="sp-testi-card">
+                            <div class="sp-testi-stars">★★★★★</div>
+                            <div class="sp-testi-text">"Kalender MPASI-nya SUPER MEMBANTU! Sebelumnya tiap hari bingung mau masak apa. Sekarang tinggal lihat kalender, semuanya udah ada. Anak juga jadi lebih mau makan karena menunyavariatif."</div>
+                            <div class="sp-testi-author">
+                                <div class="sp-testi-avatar">👩</div>
+                                <div>
+                                    <div class="sp-testi-name">Bunda Reni K.</div>
+                                    <div class="sp-testi-info">Mama Kenzie (14 bulan) · Surabaya</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sp-testi-card">
+                            <div class="sp-testi-stars">★★★★★</div>
+                            <div class="sp-testi-text">"Log makan hariannya game changer banget! Baru 1 minggu dicatat, langsung ketahuan pola GTM anak saya. Ternyata dia selalu GTM siang hari karena masih mengantuk. Geser jam makan, langsung beres!"</div>
+                            <div class="sp-testi-author">
+                                <div class="sp-testi-avatar">👩</div>
+                                <div>
+                                    <div class="sp-testi-name">Bunda Sari A.</div>
+                                    <div class="sp-testi-info">Mama Azka (10 bulan) · Bandung</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sp-testi-card">
+                            <div class="sp-testi-stars">★★★★★</div>
+                            <div class="sp-testi-text">"Chart BB/TB WHO-nya bagus banget, lebih jelas dari yang di buku pink. Desainnya rapi, langsung bisa ngerti posisi anak saya di mana. Recommended banget buat mama yang sering khawatir soal BB anak."</div>
+                            <div class="sp-testi-author">
+                                <div class="sp-testi-avatar">👩</div>
+                                <div>
+                                    <div class="sp-testi-name">Bunda Dita M.</div>
+                                    <div class="sp-testi-info">Mama Nayla (8 bulan) · Jakarta</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sp-testi-card">
+                            <div class="sp-testi-stars">★★★★★</div>
+                            <div class="sp-testi-text">"Panduan GTM-nya detail banget! Bukan cuma tips umum tapi beneran ada langkah-langkahnya. Paling suka bagian Division of Responsibility — ternyata selama ini saya yang salah pendekatan. Worth it banget!"</div>
+                            <div class="sp-testi-author">
+                                <div class="sp-testi-avatar">👩</div>
+                                <div>
+                                    <div class="sp-testi-name">Bunda Lina P.</div>
+                                    <div class="sp-testi-info">Mama Rafif (11 bulan) · Yogyakarta</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sp-testi-card">
+                            <div class="sp-testi-stars">★★★★★</div>
+                            <div class="sp-testi-text">"Murah tapi isinya berkualitas! Rp 25.000 buat 4 panduan semuanya lengkap dan informatif. Sudah saya cetak dan tempel di kulkas, buku anak, sama dinding dapur. Keren abis!"</div>
+                            <div class="sp-testi-author">
+                                <div class="sp-testi-avatar">👩</div>
+                                <div>
+                                    <div class="sp-testi-name">Bunda Ayu F.</div>
+                                    <div class="sp-testi-info">Mama Zara (7 bulan) · Semarang</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sp-testi-card">
+                            <div class="sp-testi-stars">★★★★★</div>
+                            <div class="sp-testi-text">"Download instan langsung setelah bayar, filenya high res jadi pas dicetak tetep jernih. Anak saya GTM sudah 3 minggu, setelah pakai panduan GTM-nya, dalam seminggu sudah kelihatan improvement."</div>
+                            <div class="sp-testi-author">
+                                <div class="sp-testi-avatar">👩</div>
+                                <div>
+                                    <div class="sp-testi-name">Bunda Mira S.</div>
+                                    <div class="sp-testi-info">Mama Bimo (9 bulan) · Medan</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== FAQ ===== -->
+            <div class="sp-faq-section">
+                <div class="sp-section-label" style="text-align:center">FAQ</div>
+                <h2 class="sp-section-title" style="text-align:center">Pertanyaan yang Sering Ditanya</h2>
+                <div style="margin-top: 40px;" id="faqContainer">
+                    <div class="sp-faq-item open">
+                        <div class="sp-faq-q" onclick="toggleFaq(this)">
+                            Apa format filenya dan bagaimana cara downloadnya?
+                            <span class="sp-faq-icon">+</span>
+                        </div>
+                        <div class="sp-faq-a">Semua file dalam format PDF resolusi tinggi (300 dpi), siap dicetak di kertas A4. Setelah pembayaran dikonfirmasi di Lynk.id, link download akan langsung dikirim ke email Mama — biasanya dalam 1–5 menit.</div>
+                    </div>
+                    <div class="sp-faq-item">
+                        <div class="sp-faq-q" onclick="toggleFaq(this)">
+                            Apakah bisa dicetak berkali-kali?
+                            <span class="sp-faq-icon">+</span>
+                        </div>
+                        <div class="sp-faq-a">Ya! Mama bisa cetak sebanyak yang dibutuhkan. Tidak ada batasan cetak. Cocok untuk Log Makan yang perlu diisi ulang setiap bulan.</div>
+                    </div>
+                    <div class="sp-faq-item">
+                        <div class="sp-faq-q" onclick="toggleFaq(this)">
+                            Apakah panduan ini sesuai rekomendasi dokter?
+                            <span class="sp-faq-icon">+</span>
+                        </div>
+                        <div class="sp-faq-a">Panduan disusun berdasarkan rekomendasi WHO, IDAI (Ikatan Dokter Anak Indonesia), dan Kemenkes RI. Namun panduan ini bersifat informatif dan bukan pengganti konsultasi medis langsung. Untuk kondisi spesifik anak, tetap konsultasikan ke dokter anak Mama.</div>
+                    </div>
+                    <div class="sp-faq-item">
+                        <div class="sp-faq-q" onclick="toggleFaq(this)">
+                            Cocok untuk anak usia berapa?
+                            <span class="sp-faq-icon">+</span>
+                        </div>
+                        <div class="sp-faq-a">Bundle ini dirancang terutama untuk anak usia 0–2 tahun (periode MPASI dan awal makan keluarga). Panduan GTM bisa relevan hingga anak usia 3–5 tahun juga.</div>
+                    </div>
+                    <div class="sp-faq-item">
+                        <div class="sp-faq-q" onclick="toggleFaq(this)">
+                            Bagaimana metode pembayarannya?
+                            <span class="sp-faq-icon">+</span>
+                        </div>
+                        <div class="sp-faq-a">Pembayaran melalui Lynk.id yang mendukung transfer bank, GoPay, OVO, Dana, QRIS, dan berbagai metode pembayaran lokal lainnya. Aman dan terpercaya.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== FINAL CTA ===== -->
+            <div class="sp-final-cta">
+                <div class="sp-final-inner">
+                    <div style="font-size:56px; margin-bottom:20px">🛍️</div>
+                    <h2>Siap Atasi GTM dan Pantau Tumbuh Kembang Si Kecil?</h2>
+                    <p>Bergabung dengan 200+ Mama Indonesia yang sudah menggunakan Bundle Super Mama Kit untuk mendampingi perjalanan MPASI si kecil.</p>
+                    <div class="sp-final-price">
+                        <div class="old">Total beli satuan: Rp 40.000</div>
+                        <div class="new">Rp 25.000 <span class="tag">HEMAT 37%</span></div>
+                    </div>
+                    <a href="https://lynk.id" target="_blank" class="sp-cta-btn" style="max-width:400px; margin:0 auto; font-size:18px; padding:20px; border-radius:16px; display:block;">
+                        🛍️ Beli Bundle Sekarang →
+                    </a>
+                    <div class="sp-final-note">🔒 Pembayaran aman via Lynk.id · 📦 Download instan · 🔄 Cetak ulang bebas</div>
+                    <div class="sp-also-individual">
+                        Atau beli satuan: 
+                        <a onclick="alert('Link satuan akan tersedia!')">Panduan GTM</a> · 
+                        <a onclick="alert('Link satuan akan tersedia!')">Chart BB/TB</a> · 
+                        <a onclick="alert('Link satuan akan tersedia!')">Log Makan</a> · 
+                        <a onclick="alert('Link satuan akan tersedia!')">Kalender MPASI</a>
+                        &nbsp;(masing-masing Rp 10.000)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sticky Mobile CTA -->
+            <div class="sp-sticky-mobile">
+                <a href="https://lynk.id" target="_blank" class="sp-sticky-btn">🛍️ Beli Bundle — Rp 25.000 (Hemat 37%)</a>
+            </div>
+            `;
+
+            // Countdown timer
+            let endTime = parseInt(sessionStorage.getItem('sp_countdown_end') || '0');
+            if (!endTime || endTime < Date.now()) {
+                endTime = Date.now() + (2 * 60 * 60 * 1000) + (47 * 60 * 1000) + (33 * 1000);
+                sessionStorage.setItem('sp_countdown_end', endTime.toString());
+            }
+            function updateCountdown() {
+                const diff = Math.max(0, endTime - Date.now());
+                const h = Math.floor(diff / 3600000);
+                const m = Math.floor((diff % 3600000) / 60000);
+                const s = Math.floor((diff % 60000) / 1000);
+                const hEl = document.getElementById('cd-h');
+                const mEl = document.getElementById('cd-m');
+                const sEl = document.getElementById('cd-s');
+                if (hEl) hEl.textContent = String(h).padStart(2, '0');
+                if (mEl) mEl.textContent = String(m).padStart(2, '0');
+                if (sEl) sEl.textContent = String(s).padStart(2, '0');
+                if (diff > 0) requestAnimationFrame(updateCountdown);
+            }
+            updateCountdown();
+        }
+
+        function toggleFaq(el) {
+            const item = el.parentElement;
+            item.classList.toggle('open');
+        }
+
+
+
+        // --- UTILS ---
+        function showInterstitial(callbackOrUrl) {
+            const modal = document.getElementById('interstitial');
+            const timerEl = document.getElementById('download-timer');
+            const skipBtn = document.getElementById('btn-skip-download');
+
+            modal.style.display = 'flex';
+            let timeLeft = 5;
+
+            skipBtn.style.display = 'none';
+            timerEl.style.display = 'block';
+            timerEl.innerText = `Memuat Sponsor... ${timeLeft} detik`;
+
+            if (window.currentDownloadInterval) clearInterval(window.currentDownloadInterval);
+
+            window.currentDownloadInterval = setInterval(() => {
+                timeLeft--;
+                if (timeLeft > 0) {
+                    timerEl.innerText = `Memuat Sponsor... ${timeLeft} detik`;
+                } else {
+                    clearInterval(window.currentDownloadInterval);
+                    timerEl.style.display = 'none';
+                    skipBtn.style.display = 'block';
+                }
+            }, 1000);
+
+            skipBtn.onclick = () => {
+                modal.style.display = 'none';
+                if (typeof callbackOrUrl === 'function') {
+                    callbackOrUrl();
+                } else if (typeof callbackOrUrl === 'string') {
+                    window.open(callbackOrUrl, '_blank', 'noopener,noreferrer');
+                } else {
+                    alert('Berhasil!');
+                }
+            };
+        }
+
+        // Close interstitial on outside click
+        window.onclick = function (event) {
+            const modal = document.getElementById('interstitial');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
+setTweak={setTweak}/>
+</TweakSection>
+</TweaksPanel>
+</div>
+);
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+<App />);
+</script>
+
+<style>
+    /* Responsive breakpoints */
+    @media (max-width: 768px) {
+        .desktop-nav {
+            display: none !important;
+        }
+
+        .mobile-nav {
+            display: flex !important;
+        }
+
+        .hero-grid {
+            grid-template-columns: 1fr !important;
+        }
+
+        .hero-grid>div:last-child {
+            display: none !important;
+        }
+
+        .article-grid {
+            grid-template-columns: 1fr !important;
+        }
+
+        .article-layout {
+            grid-template-columns: 1fr !important;
+        }
+
+        .article-sidebar {
+            display: none !important;
+        }
+
+        .footer-grid {
+            grid-template-columns: 1fr 1fr !important;
+        }
+    }
+
+    @media (min-width: 769px) {
+        .mobile-nav {
+            display: none !important;
+        }
+    }
+</style>
+</body>
+
+</html>
