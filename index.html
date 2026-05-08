@@ -2,8 +2,6 @@
 <html lang="id">
 
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2707908385586271"
-        crossorigin="anonymous"></script>
     <!-- <script src="https://quge5.com/88/tag.min.js" data-zone="236695" async data-cfasync="false"></script>
     <script>(function (s) { s.dataset.zone = '10970184', s.src = 'https://al5sm.com/tag.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     <script>(function (s) { s.dataset.zone = '10970246', s.src = 'https://n6wxm.com/vignette.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script> -->
@@ -538,26 +536,14 @@
     </footer>
 
     <div id="mobile-sticky-ad">
-        <div class="ad-slot ad-mobile">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2707908385586271"
-     data-ad-slot="4800786170"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins></div>
+        <div class="ad-slot ad-mobile"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-mobile.html" width="320" height="50" style="border:none;overflow:hidden"></iframe></div>
     </div>
 
     <div id="interstitial">
         <div class="interstitial-card">
             <h3 style="margin-bottom:10px">Persiapan Download...</h3>
             <p style="color:var(--text-muted); margin-bottom:20px">File Anda akan siap dalam beberapa detik.</p>
-            <div class="ad-slot ad-rect" style="margin-bottom:20px">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2707908385586271"
-     data-ad-slot="4800786170"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins></div>
+            <div style="margin-bottom:20px; border-radius:8px; overflow:hidden; border:1px solid var(--border);"><a href="https://omg10.com/4/10970240" target="_blank"><img src="./iklan.png" style="width:100%; height:auto; display:block; object-fit:cover;" alt="Sponsor"></a></div>
             <div id="download-timer" style="font-weight:700; color:var(--primary); margin-bottom:15px">Mohon tunggu 5
                 detik...</div>
             <button id="btn-skip-download" class="btn btn-primary" style="display:none; width:100%">Download
@@ -583,6 +569,59 @@
         ];
 
         // --- ROUTER ---
+        
+        // --- CHART DATA ---
+        window.chartDataSets = {
+            bbu: {
+                title: "Kurva Berat Badan per Umur (BB/U)",
+                btnText: "Ganti Grafik TB/U",
+                labelY: "Berat Badan (kg)",
+                data: [
+                    { label: '+3 SD', data: Array.from({length:61}, (_, i) => 3.3 + (i*0.25)), borderColor: '#000', borderDash: [5, 5], fill: false, pointRadius: 0 },
+                    { label: '+2 SD', data: Array.from({length:61}, (_, i) => 3.3 + (i*0.2)), borderColor: '#F9A825', fill: false, pointRadius: 0 },
+                    { label: 'Median', data: Array.from({length:61}, (_, i) => 3.3 + (i*0.15)), borderColor: '#3BAD8A', fill: false, pointRadius: 0 },
+                    { label: '-2 SD', data: Array.from({length:61}, (_, i) => 3.3 + (i*0.1)), borderColor: '#F9A825', fill: false, pointRadius: 0 },
+                    { label: '-3 SD', data: Array.from({length:61}, (_, i) => 3.3 + (i*0.05)), borderColor: '#E53935', fill: false, pointRadius: 0 },
+                    { label: 'Anak Anda', data: [], borderColor: '#3b5998', backgroundColor: '#3b5998', fill: false, pointRadius: 5 }
+                ]
+            },
+            tbu: {
+                title: "Kurva Tinggi Badan per Umur (TB/U)",
+                btnText: "Ganti Grafik BB/U",
+                labelY: "Tinggi Badan (cm)",
+                data: [
+                    { label: '+3 SD', data: Array.from({length:61}, (_, i) => 50 + (i*1.1)), borderColor: '#000', borderDash: [5, 5], fill: false, pointRadius: 0 },
+                    { label: '+2 SD', data: Array.from({length:61}, (_, i) => 50 + (i*0.9)), borderColor: '#F9A825', fill: false, pointRadius: 0 },
+                    { label: 'Median', data: Array.from({length:61}, (_, i) => 50 + (i*0.8)), borderColor: '#3BAD8A', fill: false, pointRadius: 0 },
+                    { label: '-2 SD', data: Array.from({length:61}, (_, i) => 50 + (i*0.7)), borderColor: '#F9A825', fill: false, pointRadius: 0 },
+                    { label: '-3 SD', data: Array.from({length:61}, (_, i) => 50 + (i*0.6)), borderColor: '#E53935', fill: false, pointRadius: 0 },
+                    { label: 'Anak Anda', data: [], borderColor: '#3b5998', backgroundColor: '#3b5998', fill: false, pointRadius: 5 }
+                ]
+            }
+        };
+        window.currentChartMode = 'bbu';
+
+        function initChart() {
+            const ctx = document.getElementById('growthChart');
+            if (ctx && !window.myGrowthChart) {
+                window.myGrowthChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: Array.from({length:61}, (_, i) => i),
+                        datasets: window.chartDataSets.bbu.data
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { title: { display: true, text: 'Usia (Bulan)' } },
+                            y: { title: { display: true, text: 'Berat Badan (kg)' } }
+                        }
+                    }
+                });
+            }
+        }
+
         const routes = {
             'home': renderHome,
             'tools': renderTools,
@@ -609,15 +648,7 @@
             });
 
 
-            setTimeout(() => {
-                try {
-                    document.querySelectorAll('.adsbygoogle').forEach(el => {
-                        if (!el.hasAttribute('data-adsbygoogle-status')) {
-                            (window.adsbygoogle = window.adsbygoogle || []).push({});
-                        }
-                    });
-                } catch(e) {}
-            }, 100);
+            
         }
 
         window.addEventListener('hashchange', navigate);
@@ -650,13 +681,7 @@
                 </section>
 
                 <div class="container">
-                    <div class="ad-slot ad-leaderboard">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2707908385586271"
-     data-ad-slot="4800786170"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins></div>
+                    <div class="ad-slot ad-leaderboard"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-leaderboard.html" width="728" height="90" style="border:none;overflow:hidden"></iframe></div>
 
                     <section class="section-padding">
                         <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:32px">
@@ -680,13 +705,7 @@
                         </div>
                     </section>
 
-                    <div class="ad-slot ad-native">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2707908385586271"
-     data-ad-slot="4800786170"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins></div>
+                    <div class="ad-slot ad-native"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-native.html" width="100%" height="120" style="border:none;overflow:hidden"></iframe></div>
 
                     <section class="section-padding">
                         <div class="shop-banner">
@@ -701,15 +720,10 @@
                         </div>
                     </section>
 
-                    <div class="ad-slot ad-leaderboard">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2707908385586271"
-     data-ad-slot="4800786170"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins></div>
+                    <div class="ad-slot ad-leaderboard"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-leaderboard.html" width="728" height="90" style="border:none;overflow:hidden"></iframe></div>
                 </div>
             `;
+            setTimeout(initChart, 100);
         }
 
         function renderArticle(id) {
@@ -1159,13 +1173,7 @@
                     <!-- MAIN CONTENT -->
                     <article class="art-body" id="articleBody">
 
-                        <div class="ad-slot ad-leaderboard" style="margin-bottom:32px">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2707908385586271"
-     data-ad-slot="4800786170"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins></div>
+                        <div class="ad-slot ad-leaderboard" style="margin-bottom:32px"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-leaderboard.html" width="728" height="90" style="border:none;overflow:hidden"></iframe></div>
 
                         <p>Mama pernah ngerasa frustrasi sampai mau nangis karena si kecil nolak makan? Udah masak susah-susah, disuapin dengan sabar, tapi ujung-ujungnya makanan dibuang atau mulut minta tutup rapet?</p>
 
@@ -1430,13 +1438,7 @@
                             </div>
                         </div>
 
-                        <div class="ad-slot ad-leaderboard" style="margin-top:48px">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2707908385586271"
-     data-ad-slot="4800786170"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins></div>
+                        <div class="ad-slot ad-leaderboard" style="margin-top:48px"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-leaderboard.html" width="728" height="90" style="border:none;overflow:hidden"></iframe></div>
                     </article>
 
                     <!-- SIDEBAR -->
@@ -1469,13 +1471,7 @@
                             </div>
 
                             <!-- Ad slot -->
-                            <div class="ad-slot ad-rect">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2707908385586271"
-     data-ad-slot="4800786170"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins></div>
+                            <div class="ad-slot ad-rect" style="margin-bottom:20px"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-rect.html" width="300" height="250" style="border:none;overflow:hidden"></iframe></div>
 
                             <!-- Free Tools Promo -->
                             <div class="sidebar-card" style="margin-top: 24px; background: var(--primary-light); border-color: var(--primary);">
@@ -1484,13 +1480,7 @@
                                 <a href="#/tools" class="btn btn-primary" style="width: 100%; text-align: center; font-size: 13px; padding: 10px;">Coba Tools Gratis →</a>
                             </div>
 
-                            <div class="ad-slot ad-rect" style="margin-top:24px">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2707908385586271"
-     data-ad-slot="4800786170"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins></div>
+                            <div class="ad-slot ad-rect" style="margin-bottom:20px"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-rect.html" width="300" height="250" style="border:none;overflow:hidden"></iframe></div>
                         </div>
                     </aside>
                 </div>
@@ -1532,13 +1522,7 @@
                                 <span class="badge" style="background:#f0f0f0">👁 4.5K Baca</span>
                             </div>
                         </div>
-                        <div class="ad-slot ad-leaderboard">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2707908385586271"
-     data-ad-slot="4800786170"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins></div>
+                        <div class="ad-slot ad-leaderboard"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-leaderboard.html" width="728" height="90" style="border:none;overflow:hidden"></iframe></div>
                         <div style="font-size:17px; line-height:1.8; color:#3a3a38">
                             <p style="margin-bottom:24px">${article.excerpt} Pelajari lebih lanjut dalam panduan lengkap ini.</p>
                             <div style="background:#FFF8E1; border:1px solid #F9A825; padding:24px; border-radius:12px; margin:40px 0; display:flex; gap:20px; align-items:center; flex-wrap:wrap">
@@ -1550,23 +1534,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ad-slot ad-leaderboard">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2707908385586271"
-     data-ad-slot="4800786170"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins></div>
+                        <div class="ad-slot ad-leaderboard"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-leaderboard.html" width="728" height="90" style="border:none;overflow:hidden"></iframe></div>
                     </div>
                     <aside>
                         <div class="sidebar-sticky">
-                            <div class="ad-slot ad-rect">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2707908385586271"
-     data-ad-slot="4800786170"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins></div>
+                            <div class="ad-slot ad-rect" style="margin-bottom:20px"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-rect.html" width="300" height="250" style="border:none;overflow:hidden"></iframe></div>
                             <div style="background:white; border:1px solid var(--border); border-radius:12px; padding:24px; margin-top:32px; text-align:center">
                                 <div style="font-size:40px; margin-bottom:12px">🛍️</div>
                                 <h3 style="font-size:18px; margin-bottom:8px">Super Mama Kit</h3>
@@ -1574,13 +1546,7 @@
                                 <div style="font-weight:900; color:var(--primary); font-size:20px; margin-bottom:16px">Rp 25.000</div>
                                 <a href="#/download" class="btn btn-primary" style="width:100%">Lihat Detail</a>
                             </div>
-                            <div class="ad-slot ad-rect" style="margin-top:32px">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2707908385586271"
-     data-ad-slot="4800786170"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins></div>
+                            <div class="ad-slot ad-rect" style="margin-bottom:20px"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-rect.html" width="300" height="250" style="border:none;overflow:hidden"></iframe></div>
                         </div>
                     </aside>
                 </div>
@@ -1643,13 +1609,7 @@
                         <p style="color:var(--text-muted)">Gunakan tools interaktif kami untuk memantau tumbuh kembang si kecil sesuai standar WHO dan Kemenkes RI.</p>
                     </div>
 
-                    <div class="ad-slot ad-leaderboard">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2707908385586271"
-     data-ad-slot="4800786170"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins></div>
+                    <div class="ad-slot ad-leaderboard"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-leaderboard.html" width="728" height="90" style="border:none;overflow:hidden"></iframe></div>
 
                     <div class="grid-3">
                         ${tools.map(t => `
@@ -1662,13 +1622,7 @@
                         `).join('')}
                     </div>
 
-                    <div class="ad-slot ad-leaderboard">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2707908385586271"
-     data-ad-slot="4800786170"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins></div>
+                    <div class="ad-slot ad-leaderboard"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-leaderboard.html" width="728" height="90" style="border:none;overflow:hidden"></iframe></div>
                 </div>
             `;
         }
@@ -1822,78 +1776,7 @@
                     </div>
                 </div>
             `;
-
-            setTimeout(() => {
-                if (typeof Chart !== 'undefined') {
-                    const ctx = document.getElementById('growthChart');
-                    if (ctx) {
-                        const labels60 = Array.from({ length: 61 }, (_, i) => i.toString());
-                        const generateData = (start, increment, decay) => {
-                            let data = [];
-                            let current = start;
-                            for (let i = 0; i <= 60; i++) {
-                                data.push(parseFloat(current.toFixed(1)));
-                                current += increment * Math.pow(decay, i);
-                            }
-                            return data;
-                        };
-                        const dataAnakBB = Array(61).fill(null);
-                        dataAnakBB[0] = 3.0; dataAnakBB[1] = 4.0; dataAnakBB[2] = 5.0;
-                        const dataAnakTB = Array(61).fill(null);
-                        dataAnakTB[0] = 49.0; dataAnakTB[1] = 54.0; dataAnakTB[2] = 58.0;
-
-                        window.chartDataSets = {
-                            bbu: {
-                                labelY: 'Berat Badan (kg)',
-                                title: 'Kurva Berat Badan per Umur (BB/U)',
-                                btnText: 'Ganti Grafik TB/U',
-                                data: [
-                                    { label: '+3 SD', data: generateData(5.0, 1.6, 0.92), borderColor: '#e57373', fill: false, tension: 0.4 },
-                                    { label: '+2 SD', data: generateData(4.4, 1.4, 0.92), borderColor: '#ffb74d', fill: false, tension: 0.4 },
-                                    { label: 'Median', data: generateData(3.3, 1.2, 0.92), borderColor: '#81c784', fill: false, tension: 0.4 },
-                                    { label: '-2 SD', data: generateData(2.5, 0.9, 0.92), borderColor: '#ffb74d', fill: false, tension: 0.4 },
-                                    { label: '-3 SD', data: generateData(2.1, 0.8, 0.92), borderColor: '#e57373', fill: false, tension: 0.4 },
-                                    { label: 'Anak Anda', data: dataAnakBB, borderColor: '#2C2C2A', backgroundColor: '#2C2C2A', fill: false, borderDash: [5, 5], pointRadius: 4, tension: 0.4 }
-                                ]
-                            },
-                            tbu: {
-                                labelY: 'Tinggi Badan (cm)',
-                                title: 'Kurva Tinggi Badan per Umur (TB/U)',
-                                btnText: 'Ganti Grafik BB/U',
-                                data: [
-                                    { label: '+3 SD', data: generateData(55.0, 2.6, 0.96), borderColor: '#e57373', fill: false, tension: 0.4 },
-                                    { label: '+2 SD', data: generateData(53.0, 2.5, 0.96), borderColor: '#ffb74d', fill: false, tension: 0.4 },
-                                    { label: 'Median', data: generateData(50.0, 2.4, 0.96), borderColor: '#81c784', fill: false, tension: 0.4 },
-                                    { label: '-2 SD', data: generateData(46.0, 2.3, 0.96), borderColor: '#ffb74d', fill: false, tension: 0.4 },
-                                    { label: '-3 SD', data: generateData(44.0, 2.2, 0.96), borderColor: '#e57373', fill: false, tension: 0.4 },
-                                    { label: 'Anak Anda', data: dataAnakTB, borderColor: '#2C2C2A', backgroundColor: '#2C2C2A', fill: false, borderDash: [5, 5], pointRadius: 4, tension: 0.4 }
-                                ]
-                            }
-                        };
-
-                        window.currentChartMode = 'bbu';
-
-                        window.myGrowthChart = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: labels60,
-                                datasets: window.chartDataSets.bbu.data
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                plugins: {
-                                    title: { display: false }
-                                },
-                                scales: {
-                                    x: { title: { display: true, text: 'Usia (Bulan)' } },
-                                    y: { title: { display: true, text: 'Berat Badan (kg)' } }
-                                }
-                            }
-                        });
-                    }
-                }
-            }, 100);
+            setTimeout(initChart, 100);
         }
 
         window.toggleChartType = function () {
@@ -3388,7 +3271,7 @@
                 modal.style.display = 'none';
 
                 // Buka Direct Link Monetag di tab baru (Pop-under effect)
-                window.open('https://omg10.com/4/10970240', '_blank', 'noopener,noreferrer');
+                // Direct redirect removed as per request
 
                 if (typeof callbackOrUrl === 'function') {
                     callbackOrUrl();
