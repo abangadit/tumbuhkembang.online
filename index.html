@@ -536,14 +536,18 @@
     </footer>
 
     <div id="mobile-sticky-ad">
-        <div class="ad-slot ad-mobile"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-mobile.html" width="320" height="50" style="border:none;overflow:hidden"></iframe></div>
+        <div class="ad-slot ad-mobile"><iframe
+                sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+                src="./ad-mobile.html" width="320" height="50" style="border:none;overflow:hidden"></iframe></div>
     </div>
 
     <div id="interstitial">
         <div class="interstitial-card">
             <h3 style="margin-bottom:10px">Persiapan Download...</h3>
             <p style="color:var(--text-muted); margin-bottom:20px">File Anda akan siap dalam beberapa detik.</p>
-            <div style="margin-bottom:20px; border-radius:8px; overflow:hidden; border:1px solid var(--border);"><a href="https://omg10.com/4/10970240" target="_blank"><img src="./iklan.png" style="width:100%; height:auto; display:block; object-fit:cover;" alt="Sponsor"></a></div>
+            <div class="ad-slot ad-rect" style="margin-bottom:20px"><iframe
+                    sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+                    src="./ad-rect.html" width="300" height="250" style="border:none;overflow:hidden"></iframe></div>
             <div id="download-timer" style="font-weight:700; color:var(--primary); margin-bottom:15px">Mohon tunggu 5
                 detik...</div>
             <button id="btn-skip-download" class="btn btn-primary" style="display:none; width:100%">Download
@@ -569,7 +573,7 @@
         ];
 
         // --- ROUTER ---
-        
+
         // --- CHART DATA ---
         window.chartDataSets = {
             bbu: {
@@ -577,11 +581,11 @@
                 btnText: "Ganti Grafik TB/U",
                 labelY: "Berat Badan (kg)",
                 data: [
-                    { label: '+3 SD', data: Array.from({length:61}, (_, i) => 3.3 + (i*0.25)), borderColor: '#000', borderDash: [5, 5], fill: false, pointRadius: 0 },
-                    { label: '+2 SD', data: Array.from({length:61}, (_, i) => 3.3 + (i*0.2)), borderColor: '#F9A825', fill: false, pointRadius: 0 },
-                    { label: 'Median', data: Array.from({length:61}, (_, i) => 3.3 + (i*0.15)), borderColor: '#3BAD8A', fill: false, pointRadius: 0 },
-                    { label: '-2 SD', data: Array.from({length:61}, (_, i) => 3.3 + (i*0.1)), borderColor: '#F9A825', fill: false, pointRadius: 0 },
-                    { label: '-3 SD', data: Array.from({length:61}, (_, i) => 3.3 + (i*0.05)), borderColor: '#E53935', fill: false, pointRadius: 0 },
+                    { label: '+3 SD', data: Array.from({ length: 61 }, (_, i) => 3.3 + (i * 0.25)), borderColor: '#000', borderDash: [5, 5], fill: false, pointRadius: 0 },
+                    { label: '+2 SD', data: Array.from({ length: 61 }, (_, i) => 3.3 + (i * 0.2)), borderColor: '#F9A825', fill: false, pointRadius: 0 },
+                    { label: 'Median', data: Array.from({ length: 61 }, (_, i) => 3.3 + (i * 0.15)), borderColor: '#3BAD8A', fill: false, pointRadius: 0 },
+                    { label: '-2 SD', data: Array.from({ length: 61 }, (_, i) => 3.3 + (i * 0.1)), borderColor: '#F9A825', fill: false, pointRadius: 0 },
+                    { label: '-3 SD', data: Array.from({ length: 61 }, (_, i) => 3.3 + (i * 0.05)), borderColor: '#E53935', fill: false, pointRadius: 0 },
                     { label: 'Anak Anda', data: [], borderColor: '#3b5998', backgroundColor: '#3b5998', fill: false, pointRadius: 5 }
                 ]
             },
@@ -590,11 +594,11 @@
                 btnText: "Ganti Grafik BB/U",
                 labelY: "Tinggi Badan (cm)",
                 data: [
-                    { label: '+3 SD', data: Array.from({length:61}, (_, i) => 50 + (i*1.1)), borderColor: '#000', borderDash: [5, 5], fill: false, pointRadius: 0 },
-                    { label: '+2 SD', data: Array.from({length:61}, (_, i) => 50 + (i*0.9)), borderColor: '#F9A825', fill: false, pointRadius: 0 },
-                    { label: 'Median', data: Array.from({length:61}, (_, i) => 50 + (i*0.8)), borderColor: '#3BAD8A', fill: false, pointRadius: 0 },
-                    { label: '-2 SD', data: Array.from({length:61}, (_, i) => 50 + (i*0.7)), borderColor: '#F9A825', fill: false, pointRadius: 0 },
-                    { label: '-3 SD', data: Array.from({length:61}, (_, i) => 50 + (i*0.6)), borderColor: '#E53935', fill: false, pointRadius: 0 },
+                    { label: '+3 SD', data: Array.from({ length: 61 }, (_, i) => 50 + (i * 1.1)), borderColor: '#000', borderDash: [5, 5], fill: false, pointRadius: 0 },
+                    { label: '+2 SD', data: Array.from({ length: 61 }, (_, i) => 50 + (i * 0.9)), borderColor: '#F9A825', fill: false, pointRadius: 0 },
+                    { label: 'Median', data: Array.from({ length: 61 }, (_, i) => 50 + (i * 0.8)), borderColor: '#3BAD8A', fill: false, pointRadius: 0 },
+                    { label: '-2 SD', data: Array.from({ length: 61 }, (_, i) => 50 + (i * 0.7)), borderColor: '#F9A825', fill: false, pointRadius: 0 },
+                    { label: '-3 SD', data: Array.from({ length: 61 }, (_, i) => 50 + (i * 0.6)), borderColor: '#E53935', fill: false, pointRadius: 0 },
                     { label: 'Anak Anda', data: [], borderColor: '#3b5998', backgroundColor: '#3b5998', fill: false, pointRadius: 5 }
                 ]
             }
@@ -607,7 +611,7 @@
                 window.myGrowthChart = new Chart(ctx, {
                     type: 'line',
                     data: {
-                        labels: Array.from({length:61}, (_, i) => i),
+                        labels: Array.from({ length: 61 }, (_, i) => i),
                         datasets: window.chartDataSets.bbu.data
                     },
                     options: {
@@ -648,7 +652,7 @@
             });
 
 
-            
+
         }
 
         window.addEventListener('hashchange', navigate);
