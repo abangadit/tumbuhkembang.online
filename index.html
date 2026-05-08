@@ -118,6 +118,10 @@
             height: 250px;
         }
 
+        .ad-slot iframe {
+            max-width: 100%;
+        }
+
         .ad-mobile {
             width: 320px;
             height: 50px;
@@ -429,6 +433,32 @@
             border-color: var(--primary);
         }
 
+        .hide-mobile {
+            display: block;
+        }
+
+        .show-mobile {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .hide-mobile {
+                display: none !important;
+            }
+
+            .show-mobile {
+                display: flex !important;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+
+            .section-padding {
+                padding: 40px 0;
+            }
+        }
+
         /* Tools Highlight */
         .art-tools-highlight {
             background: #f8fbfa;
@@ -439,8 +469,24 @@
             display: flex;
             gap: 20px;
             align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
         }
+
+        @media (max-width: 600px) {
+            .art-tools-highlight {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+                gap: 16px;
+            }
+
+            .ath-icon {
+                width: 56px;
+                height: 56px;
+                font-size: 28px;
+            }
+        }
+
         .ath-icon {
             font-size: 32px;
             background: white;
@@ -451,8 +497,9 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
+
         .ath-content strong {
             display: block;
             font-family: var(--font-display);
@@ -460,18 +507,21 @@
             color: var(--text-main);
             margin-bottom: 6px;
         }
+
         .ath-content p {
             font-size: 14px;
             color: #666;
             margin: 0 !important;
             line-height: 1.6 !important;
         }
+
         .ath-content a {
             color: var(--primary);
             font-weight: 700;
             text-decoration: none;
             border-bottom: 1px solid var(--primary);
         }
+
         .ath-content a:hover {
             background: var(--primary-light);
         }
@@ -1131,6 +1181,15 @@
                         font-family: var(--font-display);
                     }
 
+                    @media (max-width: 600px) {
+                        .cta-mid { padding: 24px 16px; }
+                        .cta-bottom { padding: 32px 20px; }
+                        .art-body h2 { font-size: 20px; }
+                        .art-body h3 { font-size: 17px; }
+                        .cta-bottom-price .new { font-size: 32px; }
+                        .btn-cta-main { padding: 14px 24px; width: 100%; }
+                    }
+
                     /* Related articles */
                     .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
                     @media (max-width: 600px) { .related-grid { grid-template-columns: 1fr; } }
@@ -1225,7 +1284,8 @@
                     <!-- MAIN CONTENT -->
                     <article class="art-body" id="articleBody">
 
-                        <div class="ad-slot ad-leaderboard" style="margin-bottom:32px"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-leaderboard.html" width="728" height="90" style="border:none;overflow:hidden"></iframe></div>
+                        <div class="ad-slot ad-leaderboard hide-mobile" style="margin-bottom:32px"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-leaderboard.html" width="728" height="90" style="border:none;overflow:hidden"></iframe></div>
+                        <div class="ad-slot ad-mobile show-mobile" style="margin-bottom:32px"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-mobile.html" width="320" height="50" style="border:none;overflow:hidden"></iframe></div>
 
                         <!-- Tools Highlight -->
                         <div class="art-tools-highlight">
@@ -1586,7 +1646,8 @@
                                 <span class="badge" style="background:#f0f0f0">👁 4.5K Baca</span>
                             </div>
                         </div>
-                        <div class="ad-slot ad-leaderboard"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-leaderboard.html" width="728" height="90" style="border:none;overflow:hidden"></iframe></div>
+                        <div class="ad-slot ad-leaderboard hide-mobile"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-leaderboard.html" width="728" height="90" style="border:none;overflow:hidden"></iframe></div>
+                        <div class="ad-slot ad-mobile show-mobile" style="margin-bottom:20px"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-mobile.html" width="320" height="50" style="border:none;overflow:hidden"></iframe></div>
                         
                         <!-- Tools Highlight -->
                         <div class="art-tools-highlight">
@@ -1611,7 +1672,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ad-slot ad-leaderboard"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-leaderboard.html" width="728" height="90" style="border:none;overflow:hidden"></iframe></div>
+                        <div class="ad-slot ad-leaderboard hide-mobile"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-leaderboard.html" width="728" height="90" style="border:none;overflow:hidden"></iframe></div>
+                        <div class="ad-slot ad-mobile show-mobile" style="margin-top:24px"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-mobile.html" width="320" height="50" style="border:none;overflow:hidden"></iframe></div>
                     </div>
                     <aside>
                         <div class="sidebar-sticky">
