@@ -429,6 +429,53 @@
             border-color: var(--primary);
         }
 
+        /* Tools Highlight */
+        .art-tools-highlight {
+            background: #f8fbfa;
+            border: 2px solid #eaf6f1;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 32px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+        .ath-icon {
+            font-size: 32px;
+            background: white;
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .ath-content strong {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 17px;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+        .ath-content p {
+            font-size: 14px;
+            color: #666;
+            margin: 0 !important;
+            line-height: 1.6 !important;
+        }
+        .ath-content a {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 1px solid var(--primary);
+        }
+        .ath-content a:hover {
+            background: var(--primary-light);
+        }
+
         /* Interstitial */
         #interstitial {
             position: fixed;
@@ -1062,6 +1109,7 @@
                     .cta-bottom-price .old { color: rgba(255,255,255,0.35); font-size: 16px; text-decoration: line-through; margin-bottom: 4px; }
                     .cta-bottom-price .new { color: white; font-size: 42px; font-weight: 900; font-family: var(--font-display); line-height: 1; }
                     .cta-bottom-price .per { color: rgba(255,255,255,0.5); font-size: 13px; margin-top: 4px; }
+
                     .btn-cta-main {
                         display: inline-flex; align-items: center; gap: 10px;
                         background: var(--primary);
@@ -1178,6 +1226,18 @@
                     <article class="art-body" id="articleBody">
 
                         <div class="ad-slot ad-leaderboard" style="margin-bottom:32px"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-leaderboard.html" width="728" height="90" style="border:none;overflow:hidden"></iframe></div>
+
+                        <!-- Tools Highlight -->
+                        <div class="art-tools-highlight">
+                            <div class="ath-icon">🛠️</div>
+                            <div class="ath-content">
+                                <strong>Pantau Tumbuh Kembang Si Kecil (Gratis!)</strong>
+                                <p>Sebelum lanjut membaca, Mama bisa cek kondisi si kecil dengan tools interaktif kami: 
+                                <a href="#/tools/kalkulator-gizi">Kalkulator Gizi</a>, 
+                                <a href="#/tools/grafik-pertumbuhan">Grafik WHO</a>, dan 
+                                <a href="#/tools/milestone-tracker">Milestone Tracker</a>.</p>
+                            </div>
+                        </div>
 
                         <p>Mama pernah ngerasa frustrasi sampai mau nangis karena si kecil nolak makan? Udah masak susah-susah, disuapin dengan sabar, tapi ujung-ujungnya makanan dibuang atau mulut minta tutup rapet?</p>
 
@@ -1527,6 +1587,19 @@
                             </div>
                         </div>
                         <div class="ad-slot ad-leaderboard"><iframe sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" src="./ad-leaderboard.html" width="728" height="90" style="border:none;overflow:hidden"></iframe></div>
+                        
+                        <!-- Tools Highlight -->
+                        <div class="art-tools-highlight">
+                            <div class="ath-icon">🛠️</div>
+                            <div class="ath-content">
+                                <strong>Pantau Tumbuh Kembang Si Kecil (Gratis!)</strong>
+                                <p>Sebelum lanjut membaca, Mama bisa cek kondisi si kecil dengan tools interaktif kami: 
+                                <a href="#/tools/kalkulator-gizi">Kalkulator Gizi</a>, 
+                                <a href="#/tools/grafik-pertumbuhan">Grafik WHO</a>, dan 
+                                <a href="#/tools/milestone-tracker">Milestone Tracker</a>.</p>
+                            </div>
+                        </div>
+
                         <div style="font-size:17px; line-height:1.8; color:#3a3a38">
                             <p style="margin-bottom:24px">${article.excerpt} Pelajari lebih lanjut dalam panduan lengkap ini.</p>
                             <div style="background:#FFF8E1; border:1px solid #F9A825; padding:24px; border-radius:12px; margin:40px 0; display:flex; gap:20px; align-items:center; flex-wrap:wrap">
